@@ -59,5 +59,50 @@ namespace AdvancedAlphabetEncryption.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;A&quot;:0,&quot;B&quot;:1,&quot;C&quot;:2,&quot;D&quot;:3,&quot;E&quot;:4,&quot;F&quot;:5,&quot;G&quot;:6,&quot;H&quot;:7,&quot;I&quot;:8,&quot;J&quot;:9,&quot;K&quot;:10,&quot;L&quot;:11,&quot;M&quot;:12,&quot;N&quot;:13,&quot;O&quot;:14,&quot;P&quot;:15,&quot;Q&quot;:16,&quot;R&quot;:17,&quot;S&quot;:18,&quot;T&quot;:19,&quot;U&quot;:20,&quot;V&quot;:21,&quot;W&quot;:22,&quot;X&quot;:23,&quot;Y&quot;:24,&quot;Z&quot;:25}.
+        /// </summary>
+        internal static string CharacterToInt {
+            get {
+                return ResourceManager.GetString("CharacterToInt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;0&quot;:&quot;A&quot;,&quot;1&quot;:&quot;B&quot;,&quot;2&quot;:&quot;C&quot;,&quot;3&quot;:&quot;D&quot;,&quot;4&quot;:&quot;E&quot;,&quot;5&quot;:&quot;F&quot;,&quot;6&quot;:&quot;G&quot;,&quot;7&quot;:&quot;H&quot;,&quot;8&quot;:&quot;I&quot;,&quot;9&quot;:&quot;J&quot;,&quot;10&quot;:&quot;K&quot;,&quot;11&quot;:&quot;L&quot;,&quot;12&quot;:&quot;M&quot;,&quot;13&quot;:&quot;N&quot;,&quot;14&quot;:&quot;O&quot;,&quot;15&quot;:&quot;P&quot;,&quot;16&quot;:&quot;Q&quot;,&quot;17&quot;:&quot;R&quot;,&quot;18&quot;:&quot;S&quot;,&quot;19&quot;:&quot;T&quot;,&quot;20&quot;:&quot;U&quot;,&quot;21&quot;:&quot;V&quot;,&quot;22&quot;:&quot;W&quot;,&quot;23&quot;:&quot;X&quot;,&quot;24&quot;:&quot;Y&quot;,&quot;25&quot;:&quot;Z&quot;}.
+        /// </summary>
+        internal static string IntToCharacter {
+            get {
+                return ResourceManager.GetString("IntToCharacter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;1&quot;:[&quot;all&quot;,&quot;the&quot;,&quot;worlds&quot;,&quot;a&quot;,&quot;stage&quot;],&quot;2&quot;:[&quot;and&quot;,&quot;all&quot;,&quot;the&quot;,&quot;men&quot;,&quot;and&quot;,&quot;women&quot;,&quot;merely&quot;,&quot;players&quot;],&quot;3&quot;:[&quot;they&quot;,&quot;have&quot;,&quot;their&quot;,&quot;exits&quot;,&quot;and&quot;,&quot;their&quot;,&quot;entrances&quot;],&quot;4&quot;:[&quot;and&quot;,&quot;one&quot;,&quot;man&quot;,&quot;in&quot;,&quot;his&quot;,&quot;time&quot;,&quot;plays&quot;,&quot;many&quot;,&quot;parts&quot;],&quot;5&quot;:[&quot;his&quot;,&quot;acts&quot;,&quot;being&quot;,&quot;seven&quot;,&quot;ages&quot;,&quot;at&quot;,&quot;first&quot;,&quot;the&quot;,&quot;infant&quot;],&quot;6&quot;:[&quot;mewling&quot;,&quot;and&quot;,&quot;puking&quot;,&quot;in&quot;,&quot;the&quot;,&quot;nurses&quot;,&quot;arms&quot;],&quot;7&quot;:[&quot;then&quot;,&quot;the&quot;,&quot;whining&quot;,&quot;schoolboy&quot;,&quot;with&quot;,&quot;his&quot;,&quot;satchel&quot;],&quot;8&q....
+        /// </summary>
+        internal static string POEM1 {
+            get {
+                return ResourceManager.GetString("POEM1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;1&quot;:[&quot;i&quot;,&quot;wandered&quot;,&quot;lonely&quot;,&quot;as&quot;,&quot;a&quot;,&quot;cloud&quot;],&quot;2&quot;:[&quot;that&quot;,&quot;floats&quot;,&quot;on&quot;,&quot;high&quot;,&quot;oer&quot;,&quot;vales&quot;,&quot;and&quot;,&quot;hills&quot;],&quot;3&quot;:[&quot;when&quot;,&quot;all&quot;,&quot;at&quot;,&quot;once&quot;,&quot;i&quot;,&quot;saw&quot;,&quot;a&quot;,&quot;crowd&quot;],&quot;4&quot;:[&quot;a&quot;,&quot;host&quot;,&quot;of&quot;,&quot;golden&quot;,&quot;daffodils&quot;],&quot;5&quot;:[&quot;beside&quot;,&quot;the&quot;,&quot;lake&quot;,&quot;beneath&quot;,&quot;the&quot;,&quot;trees&quot;],&quot;6&quot;:[&quot;fluttering&quot;,&quot;and&quot;,&quot;dancing&quot;,&quot;in&quot;,&quot;the&quot;,&quot;breeze&quot;],&quot;7&quot;:[&quot;continuous&quot;,&quot;as&quot;,&quot;the&quot;,&quot;stars&quot;,&quot;that&quot;,&quot;shine&quot;],&quot;8&quot;:[&quot;and&quot;,&quot;twinkle&quot;,&quot;on&quot;,&quot;the&quot;,&quot;milky&quot;,&quot;way&quot;],&quot;9&quot;:[&qu....
+        /// </summary>
+        internal static string POEM2 {
+            get {
+                return ResourceManager.GetString("POEM2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;1&quot;:[&quot;tiger&quot;,&quot;tiger&quot;,&quot;burning&quot;,&quot;bright&quot;],&quot;2&quot;:[&quot;in&quot;,&quot;the&quot;,&quot;forests&quot;,&quot;of&quot;,&quot;the&quot;,&quot;night&quot;],&quot;3&quot;:[&quot;what&quot;,&quot;immortal&quot;,&quot;hand&quot;,&quot;or&quot;,&quot;eye&quot;],&quot;4&quot;:[&quot;could&quot;,&quot;frame&quot;,&quot;thy&quot;,&quot;fearful&quot;,&quot;symmetry&quot;],&quot;5&quot;:[&quot;in&quot;,&quot;what&quot;,&quot;distant&quot;,&quot;deeps&quot;,&quot;or&quot;,&quot;skies&quot;],&quot;6&quot;:[&quot;burnt&quot;,&quot;the&quot;,&quot;fire&quot;,&quot;of&quot;,&quot;thine&quot;,&quot;eyes&quot;],&quot;7&quot;:[&quot;on&quot;,&quot;what&quot;,&quot;wings&quot;,&quot;dare&quot;,&quot;he&quot;,&quot;aspire&quot;],&quot;8&quot;:[&quot;what&quot;,&quot;the&quot;,&quot;hand&quot;,&quot;dare&quot;,&quot;seize&quot;,&quot;the&quot;,&quot;fire&quot;],&quot;9&quot;:[&quot;and&quot;,&quot;what&quot;,&quot;shoulder&quot;,&quot;and&quot;,&quot;what&quot;,&quot;art&quo....
+        /// </summary>
+        internal static string POEM3 {
+            get {
+                return ResourceManager.GetString("POEM3", resourceCulture);
+            }
+        }
     }
 }
