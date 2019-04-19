@@ -9,6 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+AdvancedAlphabetEncryption/Models/PoemWriter.cs
+TestApp
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
