@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -6,40 +7,55 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AdvancedAlphabetEncryption.Models
-{
+{   
     public class PoemReader
     {
-        string POEM1 = @"W:\Applied Programming\Assignment\AdvancedAlphabetEncryption\AdvancedAlphabetEncryption\Poems\POEM1.txt";
-        string POEM2 = @"W:\Applied Programming\Assignment\AdvancedAlphabetEncryption\AdvancedAlphabetEncryption\Poems\POEM2.txt";
-        string POEM3 = @"W:\Applied Programming\Assignment\AdvancedAlphabetEncryption\AdvancedAlphabetEncryption\Poems\POEM3.txt";
+        // Creates readonly string containing the contents of the POEMx.json file
+        readonly string POEM1 = Properties.Resources.POEM1;
+        readonly string POEM2 = Properties.Resources.POEM2;
+        readonly string POEM3 = Properties.Resources.POEM3;
 
         public PoemReader (int poemSelection, int lineSelection, int wordSelection)
         {
-            lineSelection--;
-            wordSelection--;
-
-            string[] lines = new string[0];
-            string[] words;
+            Dictionary<int, string[]> poem = new Dictionary<int, string[]>();
+            string[] wordArray;
             
             switch (poemSelection)
             {
                 case 1:
-                    lines = System.IO.File.ReadAllLines(POEM1);
+                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM1);
                     break;
                 case 2:
-                    lines = System.IO.File.ReadAllLines(POEM2);
+                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM2);
                     break;
                 case 3:
-                    lines = System.IO.File.ReadAllLines(POEM3);
+                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM3);
                     break;
             }
 
-            words = lines[lineSelection].Split();
-            Console.WriteLine(words[wordSelection]);
+            try
+            {
+                KeywordCode = string.Format("{0}.{1}.{2}", poemSelection, lineSelection, wordSelection); 
 
-            
+                // Accounting for the 0-based array indexing of the words
+                wordSelection--;
 
-
+                wordArray = poem[lineSelection];
+                Keyword = wordArray[wordSelection];
+                ValidKeyword = true;
+                Console.WriteLine(Keyword);
+            }
+            catch(IndexOutOfRangeException)
+            {
+                ValidKeyword = false;
+            }
         }
+
+        public string Keyword { get; private set; }
+
+        public string KeywordCode { get; private set; }
+
+        private bool ValidKeyword { get; set; }
+
     }
 }
