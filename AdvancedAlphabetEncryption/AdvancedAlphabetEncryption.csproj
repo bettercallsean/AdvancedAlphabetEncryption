@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Models\Agent.cs" />
     <Compile Include="Models\AlphabetGenerator.cs" />
+    <Compile Include="Models\MessageObject.cs" />
     <Compile Include="Models\PoemReader.cs" />
     <Compile Include="Models\PoemEncryption.cs" />
     <Compile Include="Models\PoemWriter.cs" />
@@ -110,7 +111,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\alphabet.json" />
     <None Include="Resources\CharacterToInt.json" />
     <None Include="Resources\IntToCharacter.json" />
     <None Include="Resources\POEM1.json" />
