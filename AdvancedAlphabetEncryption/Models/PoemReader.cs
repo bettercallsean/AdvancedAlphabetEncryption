@@ -47,6 +47,7 @@ namespace AdvancedAlphabetEncryption.Models
             }
             catch(IndexOutOfRangeException)
             {
+                Console.WriteLine("Index out of bounds!");
                 ValidKeyword = false;
             }
         }
