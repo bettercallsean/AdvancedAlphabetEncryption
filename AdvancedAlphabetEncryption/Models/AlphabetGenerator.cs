@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace AdvancedAlphabetEncryption.Models
 {
-    public class AlphabetGenerator
+    class AlphabetGenerator
     {
         Dictionary<int, char> intToCharDictionary;
         Dictionary<char, int> charToIntDictionary;
 
-        public AlphabetGenerator(string keyword = "")
+        protected internal AlphabetGenerator(string keyword)
         {
             char[] keywordChars = keyword.ToCharArray();
-            Alphabet = new char[26, keyword.Length];
+            Matrix = new char[26, keyword.Length];
 
             AlphabetArrayGenerator(keywordChars);
 
@@ -41,12 +41,23 @@ namespace AdvancedAlphabetEncryption.Models
                     if (letterPosition == 26)
                         letterPosition = 0;
 
-                    Alphabet[j, i] = intToCharDictionary[letterPosition];
+                    Matrix[j, i] = intToCharDictionary[letterPosition];
                 }
             }
         }
 
-        public char[,] Alphabet { get; private set; }
+        public char[,] Matrix { get; private set; }
+
+        public void AlphabetPrinter()
+        {
+            for(int j = 0; j < Matrix.GetLength(1); j++)
+            {
+                for (int i = 0; i < Matrix.GetLength(0); i++)
+                    Console.Write(Matrix[i, j]);
+
+                Console.WriteLine();
+            }
+        }
 
         private void AlphabetSerializer()
         {
@@ -76,8 +87,6 @@ namespace AdvancedAlphabetEncryption.Models
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Serialize(file, intToCharDictionary);
             }
-
-
         }
 
     }
