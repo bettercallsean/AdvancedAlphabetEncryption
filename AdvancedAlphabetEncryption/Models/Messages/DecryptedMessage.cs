@@ -1,69 +1,31 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdvancedAlphabetEncryption.Models
+namespace AdvancedAlphabetEncryption.Models.Messages
 {
-    public class MessageObject
+    public class DecryptedMessage : Message
     {
-        readonly Dictionary<char, int> charToIntDictionary = JsonConvert.DeserializeObject<Dictionary<char, int>>(Properties.Resources.CharacterToInt);
-        readonly Dictionary<int, char> intToCharDictionary = JsonConvert.DeserializeObject<Dictionary<int, char>>(Properties.Resources.IntToCharacter);
 
-        public MessageObject(string message, string keyword)
+        public DecryptedMessage(Agent agent, string message, string keyword) : base(message)
         {
-            Message = message;
             Keyword = keyword;
+            Decrypt();
+            DecryptedBy = agent.Initials;
         }
-
-        public void Encrypt()
+        
+        private DecryptedMessage()
         {
-            if (IsEncrypted)
-                return;
 
-            AlphabetGenerator alphabet = new AlphabetGenerator(Keyword);
-            char[] unencryptedMessage = Message.ToCharArray();
-            char[] encryptedMessage = new char[Message.Length];
-            int alphabetMatrixLineNumber = 0;
-
-            for (int i = 0; i < unencryptedMessage.Length; i++)
-            {
-                // All the letters in the charToIntDictionary are stored in upper case, so it's important that each letter is converted to an uppercase value
-                // or else the Dictionary search will fail
-                char letter = char.ToUpper(unencryptedMessage[i]);
-
-                if (!char.IsLetter(letter))
-                {
-                    encryptedMessage[i] = letter;
-                    continue;
-                }
-
-                // If the loop has iterated through every row in the alphabetMatrix, it will be reset to start on the first row again
-                if (alphabetMatrixLineNumber == alphabet.Matrix.GetLength(1))
-                    alphabetMatrixLineNumber = 0;
-
-                // Finds the letter's position in the alphabet and assigns the value that is in it's position in the alphabet matrix 
-                int letterPosition = charToIntDictionary[letter];
-                encryptedMessage[i] = alphabet.Matrix[letterPosition, alphabetMatrixLineNumber];
-
-                alphabetMatrixLineNumber++;
-            }
-
-            Message = new string(encryptedMessage);
-            IsEncrypted = true;
-            EncryptionDate = DateTime.Now;
         }
-
         public void Decrypt()
         {
-            if (!IsEncrypted)
-                return;
-
             char[] keywordChars = Keyword.ToCharArray();
-            char[] encryptedMessage = Message.ToCharArray();
-            char[] unencryptedMessage = new char[Message.Length];
+            char[] encryptedMessage = MessageText.ToCharArray();
+            char[] unencryptedMessage = new char[MessageText.Length];
             int alphabetMatrixLineNumber = 0;
 
             for (int i = 0; i < encryptedMessage.Length; i++)
@@ -106,23 +68,22 @@ namespace AdvancedAlphabetEncryption.Models
 
                     unencryptedMessage[i] = intToCharDictionary[characterPosition];
                 }
-                
+
                 alphabetMatrixLineNumber++;
             }
 
-            Message = new string(unencryptedMessage);
-            IsEncrypted = false;
+            MessageText = new string(unencryptedMessage);
             DecryptionDate = DateTime.Now;
+            
         }
 
-        public DateTime EncryptionDate { get; private set; }
-
+        public string Keyword { get; set; }
         public DateTime DecryptionDate { get; private set; }
+        public string DecryptedBy { get; private set; }
+    }
 
-        public string Message { get; private set; }
-
-        public string Keyword { get; private set; }
-
-        public bool IsEncrypted { get; private set; } = false;
+    public class DecryptedMessagesContext : DbContext
+    {
+        public DbSet<DecryptedMessage> Messages { get; set; }
     }
 }
