@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdvancedAlphabetEncryption.Models.Messages
 {
@@ -58,8 +53,4 @@ namespace AdvancedAlphabetEncryption.Models.Messages
         public string EncryptedBy { get; private set; }
     }
 
-    public class EncryptedMessagesContext : DbContext
-    {
-        public DbSet<EncryptedMessage> Messages { get; set; }
-    }
 }

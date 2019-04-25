@@ -1,12 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
-using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
+using AdvancedAlphabetEncryption.Models.Messages;
 
 namespace AdvancedAlphabetEncryption.Models
 {
@@ -45,6 +42,13 @@ namespace AdvancedAlphabetEncryption.Models
 
         public string MessageText { get; protected set; }
 
+    }
+
+    public class MessagesContext : DbContext
+    {
+        public DbSet<DecryptedMessage> DecryptedMessages { get; set; }
+        public DbSet<EncryptedMessage> EncryptedMessages { get; set; }
+        
     }
 
 }
