@@ -18,11 +18,11 @@ namespace AdvancedAlphabetEncryption.Models
 
 
 
-        public Agent(string _firstName, string _lastName, string _email)
+        public Agent(string firstName, string lastName, string email)
         {
-            FirstName = _firstName;
-            LastName = _lastName;
-            Email = _email;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
         }
 
         public string FirstName
@@ -53,8 +53,8 @@ namespace AdvancedAlphabetEncryption.Models
             {
                 try
                 {
-                    _initials[0] = _firstName[0];
-                    _initials[1] = _lastName[0];
+                    _initials[0] = char.ToUpper(_firstName[0]);
+                    _initials[1] = char.ToUpper(_lastName[0]);
 
                     return new string(_initials);
                 }
