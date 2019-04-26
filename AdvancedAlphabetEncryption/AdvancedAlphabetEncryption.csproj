@@ -95,13 +95,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201904251114535_InitialCreate.cs" />
-    <Compile Include="Migrations\201904251114535_InitialCreate.Designer.cs">
-      <DependentUpon>201904251114535_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201904242149416_InitialCreate.cs" />
+    <Compile Include="Migrations\201904242149416_InitialCreate.Designer.cs">
+      <DependentUpon>201904242149416_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904251118415_InitialTable.cs" />
-    <Compile Include="Migrations\201904251118415_InitialTable.Designer.cs">
-      <DependentUpon>201904251118415_InitialTable.cs</DependentUpon>
+    <Compile Include="Migrations\201904261955011_MessageStringRename.cs" />
+    <Compile Include="Migrations\201904261955011_MessageStringRename.Designer.cs">
+      <DependentUpon>201904261955011_MessageStringRename.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agent.cs" />
@@ -124,6 +124,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -149,11 +150,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904251114535_InitialCreate.resx">
-      <DependentUpon>201904251114535_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904242149416_InitialCreate.resx">
+      <DependentUpon>201904242149416_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904251118415_InitialTable.resx">
-      <DependentUpon>201904251118415_InitialTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904261955011_MessageStringRename.resx">
+      <DependentUpon>201904261955011_MessageStringRename.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
