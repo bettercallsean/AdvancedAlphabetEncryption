@@ -19,8 +19,8 @@ namespace AdvancedAlphabetEncryption.Models.Messages
         public void Decrypt()
         {
             char[] keywordChars = Keyword.ToCharArray();
-            char[] encryptedMessage = MessageText.ToCharArray();
-            char[] unencryptedMessage = new char[MessageText.Length];
+            char[] encryptedMessage = MessageString.ToCharArray();
+            char[] unencryptedMessage = new char[MessageString.Length];
             int alphabetMatrixLineNumber = 0;
 
             for (int i = 0; i < encryptedMessage.Length; i++)
@@ -67,7 +67,7 @@ namespace AdvancedAlphabetEncryption.Models.Messages
                 alphabetMatrixLineNumber++;
             }
 
-            MessageText = new string(unencryptedMessage);
+            MessageString = new string(unencryptedMessage);
             DecryptionDate = DateTime.Now;
             
         }
