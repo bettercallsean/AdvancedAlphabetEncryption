@@ -14,7 +14,7 @@ namespace AdvancedAlphabetEncryption.Models.Messages
         {
 
         }
-        private void Encrypt()
+        public void Encrypt()
         {
             AlphabetGenerator alphabet = new AlphabetGenerator(Keyword);
             char[] unencryptedMessage = MessageString.ToCharArray();
@@ -48,9 +48,9 @@ namespace AdvancedAlphabetEncryption.Models.Messages
             EncryptionDate = DateTime.Now;
         }
 
-        public string Keyword { get; private set; }
-        public DateTime EncryptionDate { get; private set; }
-        public string EncryptedBy { get; private set; }
+        public string Keyword { get; set; }
+        public DateTime EncryptionDate { get; set; }
+        public string EncryptedBy { get; set; }
     }
 
 }
