@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\EncryptedMessgeViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -95,15 +96,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201904242149416_InitialCreate.cs" />
-    <Compile Include="Migrations\201904242149416_InitialCreate.Designer.cs">
-      <DependentUpon>201904242149416_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904261955011_MessageStringRename.cs" />
-    <Compile Include="Migrations\201904261955011_MessageStringRename.Designer.cs">
-      <DependentUpon>201904261955011_MessageStringRename.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Agent.cs" />
     <Compile Include="Models\AlphabetGenerator.cs" />
     <Compile Include="Models\Messages\Message.cs" />
@@ -148,14 +140,10 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904242149416_InitialCreate.resx">
-      <DependentUpon>201904242149416_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904261955011_MessageStringRename.resx">
-      <DependentUpon>201904261955011_MessageStringRename.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="View\" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
