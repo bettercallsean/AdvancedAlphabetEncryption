@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using AdvancedAlphabetEncryption.Models.Messages;
+using Microsoft.Win32;
 
 namespace AdvancedAlphabetEncryption.Models
 {
@@ -17,30 +18,12 @@ namespace AdvancedAlphabetEncryption.Models
             MessageString = message;
         }
 
-        public void SaveToFile(string filepath = "")
-        {
-            string filename = DateTime.Now.ToString("yyyyMMddHHmmss");
-
-            if (string.IsNullOrWhiteSpace(filepath))
-            {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Google Drive\Applied Programming\Assignment\Messages\" + filename + ".txt"))
-                {
-                    file.WriteLine(MessageString);
-                }
-            }
-            else
-            {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(filepath + filename + ".txt"))
-                {
-                    file.WriteLine(MessageString);
-                }
-            }
-        }
+        
 
         [Key]
         public int MessageId { get; set; }
 
-        public string MessageString { get; protected set; }
+        public string MessageString { get; set; }
 
     }
 
