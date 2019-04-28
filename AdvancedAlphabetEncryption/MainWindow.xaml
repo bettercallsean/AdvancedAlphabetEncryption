@@ -4,9 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedAlphabetEncryption"
+        xmlns:model="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+
+    <Window.Resources>
+        <model:EncryptedMessgeViewModel x:Key="EncryptedMessgeViewModel"/>
+    </Window.Resources>
+    
+    <DockPanel Margin="20">
+        <StackPanel Margin="0, 0, 20, 0" Width="600" DataContext="{Binding Source={StaticResource EncryptedMessgeViewModel}}">
+            <TextBlock>Encrypt</TextBlock>
+            <TextBox Text="{Binding Path=MessageString, Mode=OneWayToSource}" Height="100" Margin="0, 5"/>
+            <DockPanel HorizontalAlignment="Right">
+                <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0"/>
+                <Button Command="{Binding EncryptCommand}" Height="20" Width="80" Content="Encrypt"/>
+            </DockPanel>
+        </StackPanel>
+
+        <StackPanel DataContext="{Binding Source={StaticResource EncryptedMessgeViewModel}}">
+            <TextBlock>Brown Cow</TextBlock>
+            <TextBlock Text="{Binding Path=MessageString}" />
+        </StackPanel>
+    </DockPanel>
+   
 </Window>
