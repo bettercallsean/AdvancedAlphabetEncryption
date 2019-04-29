@@ -4,15 +4,13 @@ namespace AdvancedAlphabetEncryption.Models.Messages
 {
     public class DecryptedMessage : Message
     {
-
         public DecryptedMessage(Agent agent, string message, string keyword) : base(message)
         {
             Keyword = keyword;
             Decrypt();
             DecryptedBy = agent.Initials;
         }
-        
-        private DecryptedMessage()
+        public DecryptedMessage()
         {
 
         }
