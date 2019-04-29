@@ -4,11 +4,10 @@ namespace AdvancedAlphabetEncryption.Models.Messages
 {
     public class EncryptedMessage : Message
     {
-        public EncryptedMessage(Agent agent, string message, string keyword) : base(message)
+        public EncryptedMessage(Agent agent, string message, string keyword) : base(agent, message)
         {
             Keyword = keyword;
             Encrypt();
-            EncryptedBy = agent.Initials;
         }
         public EncryptedMessage()
         {
@@ -45,12 +44,7 @@ namespace AdvancedAlphabetEncryption.Models.Messages
             }
 
             MessageString = new string(encryptedMessage);
-            EncryptionDate = DateTime.Now;
+            CreationDate = DateTime.Now;
         }
-
-        public string Keyword { get; set; }
-        public DateTime EncryptionDate { get; set; }
-        public string EncryptedBy { get; set; }
     }
-
 }

@@ -13,17 +13,23 @@ namespace AdvancedAlphabetEncryption.Models
         protected readonly Dictionary<char, int> charToIntDictionary = JsonConvert.DeserializeObject<Dictionary<char, int>>(Properties.Resources.CharacterToInt);
         protected readonly Dictionary<int, char> intToCharDictionary = JsonConvert.DeserializeObject<Dictionary<int, char>>(Properties.Resources.IntToCharacter);
 
-        public Message(string message = "")
+        public Message()
         {
-            MessageString = message;
+
         }
 
+        public Message(Agent agent, string message)
+        {
+            MessageString = message;
+            CreatedBy = agent.Initials;
+        }
         
 
         [Key]
         public int MessageId { get; set; }
-
         public string MessageString { get; set; }
-
+        public DateTime CreationDate { get; set; }
+        public string  CreatedBy { get; set; }
+        public string Keyword { get; set; }
     }
 }
