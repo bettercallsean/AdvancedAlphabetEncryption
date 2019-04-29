@@ -27,7 +27,7 @@ namespace AdvancedAlphabetEncryption.Models
 
         [Key]
         public int MessageId { get; set; }
-        public string MessageString { get; set; }
+        public string MessageString { get; set; } = "";
         public DateTime CreationDate { get; set; }
         public string  CreatedBy { get; set; }
         public string Keyword { get; set; }
