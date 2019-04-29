@@ -46,6 +46,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
             set
             {
+                // If the textbox doesn't contain solely whitespace, it will continue with the keyword assignment check 
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     value = value.Replace(" ", "");
@@ -56,11 +57,15 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
                         OnPropertyChanged();
                     }
+                    // If there are special characters or numbers, then the keyword is reverted to the default
                     else
                         _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
 
                     IsEncrypted = true;
                 }
+                // If there is no text in the textbox, the keyword is reverted to the default
+                else
+                    _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
             }
         }
 

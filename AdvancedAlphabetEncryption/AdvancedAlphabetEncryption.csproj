@@ -148,9 +148,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904291801347_InitialMigration.resx">
       <DependentUpon>201904291801347_InitialMigration.cs</DependentUpon>
