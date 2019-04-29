@@ -52,16 +52,12 @@ namespace AdvancedAlphabetEncryption.ViewModels
                     value = value.Replace(" ", "");
                     // If the entered value only contains letters, then that is used as the keyword
                     if (Regex.IsMatch(value, @"^[a-zA-Z]+$"))
-                    {
                         _decryptedMessage.Keyword = value;
 
-                        OnPropertyChanged();
-                    }
                     // If there are special characters or numbers, then the keyword is reverted to the default
                     else
                         _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
 
-                    IsEncrypted = true;
                 }
                 // If there is no text in the textbox, the keyword is reverted to the default
                 else
