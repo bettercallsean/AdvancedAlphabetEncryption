@@ -13,7 +13,7 @@ using Microsoft.Win32;
 
 namespace AdvancedAlphabetEncryption.ViewModels
 {
-    public class EncryptedMessgeViewModel : INotifyPropertyChanged
+    public class EncryptedMessageViewModel : ViewModelBase
     {
         private EncryptedMessage _encryptedMessage = new EncryptedMessage();
         
@@ -23,34 +23,16 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
             set
             {
-                if (!string.IsNullOrEmpty(value))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
                     _encryptedMessage.MessageString = value;
                     _encryptedMessage.Keyword = Keyword.GetKeyword;
 
-                    OnPropertyChanged("MessageString");
+                    OnPropertyChanged();
                 }
                     
             }
         }
-
-        public string KeywordString
-        {
-            get => Keyword.GetKeyword;
-        }
-
-        // Used to determine whether the SaveFileDialog box appears
-        private bool _saveToFileChecked = false;
-        public bool SaveToFileChecked
-        {
-            get => _saveToFileChecked;
-            set
-            {
-                _saveToFileChecked = value;
-                OnPropertyChanged("SaveToFileChecked");
-            }
-
-        } 
 
         public ICommand EncryptCommand
         {
@@ -85,40 +67,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
             
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyname)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
-        }
+        
     }
 
-    public class RelayCommand : ICommand
-    {
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
-
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
-        {
-            _execute = execute ?? throw new ArgumentNullException("execute");
-            _canExecute = canExecute;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute(parameter);
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
-
-        public void Execute(object parameter)
-        {
-            _execute(parameter ?? "<N/A>");
-        }
-
-    }
+    
 
 }
