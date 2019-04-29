@@ -81,7 +81,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AlphabetEncryptionDbContext\AdvancedAlphabetEncryptionContext.cs" />
     <Compile Include="ViewModels\EncryptedMessgeViewModel.cs" />
+    <Compile Include="ViewModels\KeywordViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
