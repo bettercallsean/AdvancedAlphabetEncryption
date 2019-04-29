@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -14,15 +15,24 @@ namespace AdvancedAlphabetEncryption.ViewModels
     {
         readonly private DecryptedMessage _decryptedMessage = new DecryptedMessage();
 
+        public DecryptedMessageViewModel()
+        {
+            _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
+        }
+
         public string MessageString
         {
             get => _decryptedMessage.MessageString;
 
             set
             {
+                // As long as there are characters in the text box, the message will be assigned to the _decryptedMessage object
                 if (!string.IsNullOrEmpty(value))
                 {
                     _decryptedMessage.MessageString = value;
+
+                    if (!IsEncrypted)
+                        IsEncrypted = true;
 
                     OnPropertyChanged();
                 }
@@ -36,47 +46,40 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
             set
             {
-                value = value.Replace(" ", "");
-                if(!string.IsNullOrEmpty(value))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
-                    _decryptedMessage.Keyword = value;
-                    ValidKeyword = true;
+                    value = value.Replace(" ", "");
+                    // If the entered value only contains letters, then that is used as the keyword
+                    if (Regex.IsMatch(value, @"^[a-zA-Z]+$"))
+                    {
+                        _decryptedMessage.Keyword = value;
 
-                    OnPropertyChanged();
-                }
-                else
-                {
-                    ValidKeyword = false;
+                        OnPropertyChanged();
+                    }
+                    else
+                        _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
+
+                    IsEncrypted = true;
                 }
             }
         }
 
-        private bool _validKeyword;
-        public bool ValidKeyword
-        {
-            get => _validKeyword;
 
-            private set
-            {
-                _validKeyword = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ICommand DecryptCommand
-        {
-            get => new RelayCommand(o => DecryptMessage());
-
-        }
+        public ICommand DecryptCommand { get => new RelayCommand(o => DecryptMessage()); }
 
         public void DecryptMessage()
         {
-            if (ValidKeyword)
+            if (SaveToFileChecked)
+                SaveToFile(_decryptedMessage);
+
+            // If a valid keyword has been entered (any alphabetical characters), then the program can proceed
+            // with the decryption process
+            if (IsEncrypted)
             {
                 _decryptedMessage.Decrypt();
+                IsEncrypted = false;
 
-                if (SaveToFileChecked)
-                    SaveToFile(_decryptedMessage);
+                OnPropertyChanged("MessageString");
             }
         }
     }

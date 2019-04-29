@@ -17,6 +17,11 @@ namespace AdvancedAlphabetEncryption.ViewModels
     {
         readonly private EncryptedMessage _encryptedMessage = new EncryptedMessage();
         
+        public EncryptedMessageViewModel()
+        {
+            _encryptedMessage.Keyword = Keyword.GetKeyword;
+        }
+        
         public string MessageString
         {
             get => _encryptedMessage.MessageString;
@@ -26,27 +31,29 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     _encryptedMessage.MessageString = value;
-                    _encryptedMessage.Keyword = Keyword.GetKeyword;
+
+                    if (IsEncrypted)
+                        IsEncrypted = false;
 
                     OnPropertyChanged();
                 }
-                    
             }
         }
 
-        public ICommand EncryptCommand
-        {
-            get => new RelayCommand(o => EncryptMessage());
-        }
+        public ICommand EncryptCommand { get => new RelayCommand(o => EncryptMessage()); }
 
         public void EncryptMessage()
         {
-            _encryptedMessage.Encrypt();
-
-            if(SaveToFileChecked)
+            if (SaveToFileChecked)
                 SaveToFile(_encryptedMessage);
 
-            OnPropertyChanged("MessageString");
+            if (!IsEncrypted)
+            {
+                _encryptedMessage.Encrypt();
+                IsEncrypted = true;
+
+                OnPropertyChanged("MessageString");
+            }
         }
         
     }

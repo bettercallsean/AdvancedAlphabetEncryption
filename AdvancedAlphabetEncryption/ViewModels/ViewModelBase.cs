@@ -18,6 +18,17 @@ namespace AdvancedAlphabetEncryption.ViewModels
             get => Keyword.GetKeyword;
         }
 
+        private bool _isEncrypted;
+        public bool IsEncrypted
+        {
+            get => _isEncrypted;
+            set
+            {
+                _isEncrypted = value;
+                OnPropertyChanged();
+            }
+        }
+
         // Used to determine whether the SaveFileDialog box appears
         private bool _saveToFileChecked = false;
         public bool SaveToFileChecked
