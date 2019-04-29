@@ -15,7 +15,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
 {
     public class EncryptedMessageViewModel : ViewModelBase
     {
-        private EncryptedMessage _encryptedMessage = new EncryptedMessage();
+        readonly private EncryptedMessage _encryptedMessage = new EncryptedMessage();
         
         public string MessageString
         {
@@ -44,29 +44,10 @@ namespace AdvancedAlphabetEncryption.ViewModels
             _encryptedMessage.Encrypt();
 
             if(SaveToFileChecked)
-                SaveToFile();
+                SaveToFile(_encryptedMessage);
+
+            OnPropertyChanged("MessageString");
         }
-
-        public void SaveToFile()
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
-            {
-                FileName = _encryptedMessage.EncryptionDate.ToString("yyyyMMddHHmmss"),
-                Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
-                Title = "Save an encrypted file"
-            };
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog.FileName))
-                {
-                    file.WriteLine(MessageString);
-                    file.WriteLine(Keyword.GetKeyword);
-                }
-            }
-            
-        }
-
         
     }
 

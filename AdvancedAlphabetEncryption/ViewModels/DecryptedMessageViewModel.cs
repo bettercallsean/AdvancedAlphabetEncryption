@@ -12,7 +12,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
 {
     public class DecryptedMessageViewModel : ViewModelBase
     {
-        private DecryptedMessage _decryptedMessage = new DecryptedMessage();
+        readonly private DecryptedMessage _decryptedMessage = new DecryptedMessage();
 
         public string MessageString
         {
@@ -76,28 +76,8 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 _decryptedMessage.Decrypt();
 
                 if (SaveToFileChecked)
-                    SaveToFile();
+                    SaveToFile(_decryptedMessage);
             }
-        }
-
-        public void SaveToFile()
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
-            {
-                FileName = _decryptedMessage.DecryptionDate.ToString("yyyyMMddHHmmss"),
-                Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
-                Title = "Save an encrypted file"
-            };
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog.FileName))
-                {
-                    file.WriteLine(MessageString);
-                    file.WriteLine(Models.Keyword.GetKeyword);
-                }
-            }
-
         }
     }
 }
