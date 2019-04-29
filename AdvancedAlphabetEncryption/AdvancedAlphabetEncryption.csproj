@@ -82,10 +82,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AlphabetEncryptionDbContext\AdvancedAlphabetEncryptionContext.cs" />
+    <Compile Include="Migrations\201904291801347_InitialMigration.cs" />
+    <Compile Include="Migrations\201904291801347_InitialMigration.Designer.cs">
+      <DependentUpon>201904291801347_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\DecryptedMessageViewModel.cs" />
     <Compile Include="ViewModels\EncryptedMessageViewModel.cs" />
-    <Compile Include="ViewModels\KeywordViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +152,9 @@
     <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201904291801347_InitialMigration.resx">
+      <DependentUpon>201904291801347_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
