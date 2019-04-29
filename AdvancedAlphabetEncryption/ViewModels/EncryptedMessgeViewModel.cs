@@ -34,6 +34,11 @@ namespace AdvancedAlphabetEncryption.ViewModels
             }
         }
 
+        public string KeywordString
+        {
+            get => Keyword.GetKeyword;
+        }
+
         // Used to determine whether the SaveFileDialog box appears
         private bool _saveToFileChecked = false;
         public bool SaveToFileChecked

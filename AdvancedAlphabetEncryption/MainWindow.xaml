@@ -11,20 +11,21 @@
     <Window.Resources>
         <model:EncryptedMessgeViewModel x:Key="EncryptedMessgeViewModel"/>
     </Window.Resources>
-    
-    <DockPanel Margin="20">
-        <StackPanel Margin="0, 0, 20, 0" Width="600" DataContext="{Binding Source={StaticResource EncryptedMessgeViewModel}}">
+
+    <DockPanel Margin="20" DataContext="{Binding Source={StaticResource EncryptedMessgeViewModel}}">
+        <StackPanel Margin="0, 0, 20, 0" Width="600" >
             <TextBlock>Encrypt</TextBlock>
             <TextBox Text="{Binding Path=MessageString, Mode=OneWayToSource}" Height="100" Margin="0, 5"/>
+
             <DockPanel HorizontalAlignment="Right">
-                <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0"/>
-                <Button Command="{Binding EncryptCommand}" Height="20" Width="80" Content="Encrypt"/>
+                <Button Command="{Binding EncryptCommand}" Height="20" Width="80" Content="Encrypt" DockPanel.Dock="Right"/>
+                <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0" DockPanel.Dock="Right"/>
             </DockPanel>
         </StackPanel>
-
-        <StackPanel DataContext="{Binding Source={StaticResource EncryptedMessgeViewModel}}">
-            <TextBlock>Brown Cow</TextBlock>
-            <TextBlock Text="{Binding Path=MessageString}" />
+        
+        <!--Temporary Text Block used to ensure that text was passed through to the ViewModel class-->
+        <StackPanel>
+            <TextBlock Text="{Binding Path=KeywordString, StringFormat=Keyword: {0}}" />
         </StackPanel>
     </DockPanel>
    
