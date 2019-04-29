@@ -57,11 +57,12 @@ namespace AdvancedAlphabetEncryption.ViewModels
                     // If there are special characters or numbers, then the keyword is reverted to the default
                     else
                         _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
-
                 }
                 // If there is no text in the textbox, the keyword is reverted to the default
                 else
                     _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
+
+                OnPropertyChanged();
             }
         }
 
