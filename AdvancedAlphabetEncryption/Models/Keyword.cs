@@ -17,9 +17,9 @@ namespace AdvancedAlphabetEncryption.Models
 
         private string _keyword = "";
 
-        public Keyword (string keyword = "")
+        public Keyword ()
         {
-            KeywordString = keyword;
+
         }
 
         public void GenerateKeyword(int poemSelection, int lineSelection, int wordSelection)
@@ -64,6 +64,7 @@ namespace AdvancedAlphabetEncryption.Models
             wordArray = poem[lineSelection];
             KeywordString = wordArray[wordSelection];
             ValidKeyword = true;
+            DaySet = DateTime.Now;
         }
 
         public void GenerateRandomKeyword()
@@ -93,10 +94,13 @@ namespace AdvancedAlphabetEncryption.Models
             int wordSelection = random.Next(0, wordArray.Length);
 
             KeywordString = wordArray[wordSelection];
+            KeywordCode = string.Format("{0}.{1}.{2}", poemSelection.ToString().PadLeft(2, '0'), lineSelection.ToString().PadLeft(2, '0'), wordSelection++.ToString().PadLeft(2, '0'));
             ValidKeyword = true;
+            DaySet = DateTime.Now;
 
         }
 
+        public int Id { get; set; }
         public string KeywordString
         {
             get => _keyword;
@@ -106,15 +110,20 @@ namespace AdvancedAlphabetEncryption.Models
                 if(!string.IsNullOrWhiteSpace(value))
                 {
                     _keyword = value;
+                    GetKeyword = value;
                     ValidKeyword = true;
                 }
             }
         }
 
+        public static string GetKeyword { get; private set; }
+
         public string KeywordCode { get; private set; }
 
         // When a Keyword object is created, there will be no valid keyword assigned to it
         public bool ValidKeyword { get; set; } = false;
+
+        public DateTime DaySet { get; private set; }
 
     }
 }
