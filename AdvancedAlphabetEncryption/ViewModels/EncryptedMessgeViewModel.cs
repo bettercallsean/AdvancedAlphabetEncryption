@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
     public class EncryptedMessgeViewModel : INotifyPropertyChanged
     {
         private EncryptedMessage _encryptedMessage = new EncryptedMessage();
-        private Keyword _keyword = new Keyword();
-
+        
         public string MessageString
         {
             get => _encryptedMessage.MessageString;
@@ -26,8 +26,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 if (!string.IsNullOrEmpty(value))
                 {
                     _encryptedMessage.MessageString = value;
-                    _keyword.GenerateRandomKeyword();
-                    _encryptedMessage.Keyword = _keyword.KeywordString;
+                    _encryptedMessage.Keyword = Keyword.GetKeyword;
 
                     OnPropertyChanged("MessageString");
                 }
@@ -75,6 +74,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog.FileName))
                 {
                     file.WriteLine(MessageString);
+                    file.WriteLine(Keyword.GetKeyword);
                 }
             }
             
@@ -94,9 +94,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
-            if (execute == null) throw new ArgumentNullException("execute");
-
-            _execute = execute;
+            _execute = execute ?? throw new ArgumentNullException("execute");
             _canExecute = canExecute;
         }
 
