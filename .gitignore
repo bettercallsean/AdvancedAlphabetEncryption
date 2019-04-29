@@ -10,6 +10,7 @@
 *.userosscache
 *.sln.docstates
 AdvancedAlphabetEncryption/Models/PoemWriter.cs
+AdvancedAlphabetEncryption/Migrations
 TestApp
 
 # User-specific files (MonoDevelop/Xamarin Studio)
