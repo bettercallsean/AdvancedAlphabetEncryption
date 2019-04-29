@@ -26,12 +26,4 @@ namespace AdvancedAlphabetEncryption.Models
         public string MessageString { get; set; }
 
     }
-
-    public class MessagesContext : DbContext
-    {
-        public DbSet<DecryptedMessage> DecryptedMessages { get; set; }
-        public DbSet<EncryptedMessage> EncryptedMessages { get; set; }
-        
-    }
-
 }
