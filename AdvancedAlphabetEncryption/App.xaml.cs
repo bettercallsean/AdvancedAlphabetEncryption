@@ -16,8 +16,15 @@ namespace AdvancedAlphabetEncryption
     /// </summary>
     public partial class App : Application
     {
-        
-        private void SetKeyword(object sender, StartupEventArgs e)
+        public static Agent agent;
+        public static Keyword keyword = new Keyword();
+        private void StartupTask(object sender, StartupEventArgs e)
+        {
+            agent = new Agent("sean", "edwards", "seanedwards97@gmail.com");
+            keyword.SetBy = agent.Initials;
+            SetKeyword();
+        }
+        private void SetKeyword()
         {
             // Retrieves the last Keyword stored in the datbase
             using (var db = new AdvancedAlphabetEncryptionContext())
@@ -29,7 +36,6 @@ namespace AdvancedAlphabetEncryption
                 if (!(query is null) && query.DaySet.DayOfYear == DateTime.Now.DayOfYear)
                     return;
 
-                Keyword keyword = new Keyword();
                 keyword.GenerateRandomKeyword();
                 db.Keyword.Add(keyword);
 
