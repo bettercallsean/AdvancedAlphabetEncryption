@@ -110,13 +110,12 @@ namespace AdvancedAlphabetEncryption.Models
                 if(!string.IsNullOrWhiteSpace(value))
                 {
                     _keyword = value;
-                    GetKeyword = value;
                     ValidKeyword = true;
                 }
             }
         }
 
-        public static string GetKeyword { get; private set; }
+        public string SetBy { get; set; }
 
         public string KeywordCode { get; private set; }
 

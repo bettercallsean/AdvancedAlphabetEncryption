@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -12,10 +13,6 @@ namespace AdvancedAlphabetEncryption.Models
     {
         private string _firstName, _lastName, _email;
         private char[] _initials = new char[2];
-        //private int _ID;
-
-        public static int globalAgentID;
-
 
 
         public Agent(string firstName, string lastName, string email)
@@ -24,6 +21,9 @@ namespace AdvancedAlphabetEncryption.Models
             LastName = lastName;
             Email = email;
         }
+
+        [Key]
+        public int AgentID { get; set; }
 
         public string FirstName
         {
