@@ -17,7 +17,8 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         public DecryptedMessageViewModel()
         {
-            _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
+            _decryptedMessage.Keyword = App.keyword.KeywordString;
+            _decryptedMessage.CreatedBy = App.agent.Initials;
         }
 
         public string MessageString
@@ -56,11 +57,11 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
                     // If there are special characters or numbers, then the keyword is reverted to the default
                     else
-                        _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
+                        _decryptedMessage.Keyword = App.keyword.KeywordString;
                 }
                 // If there is no text in the textbox, the keyword is reverted to the default
                 else
-                    _decryptedMessage.Keyword = Models.Keyword.GetKeyword;
+                    _decryptedMessage.Keyword = App.keyword.KeywordString; 
 
                 OnPropertyChanged();
             }
@@ -82,7 +83,15 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 IsEncrypted = false;
 
                 OnPropertyChanged("MessageString");
+
+                SaveToDatabase();
             }
+        }
+
+        private void SaveToDatabase()
+        {
+            db.DecryptedMessages.Add(_decryptedMessage);
+            db.SaveChanges();
         }
     }
 }

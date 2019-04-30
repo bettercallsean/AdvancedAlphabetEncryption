@@ -1,4 +1,5 @@
-﻿using AdvancedAlphabetEncryption.Models;
+﻿using AdvancedAlphabetEncryption.AlphabetEncryptionDbContext;
+using AdvancedAlphabetEncryption.Models;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,10 @@ namespace AdvancedAlphabetEncryption.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
+        public AdvancedAlphabetEncryptionContext db = new AdvancedAlphabetEncryptionContext();
         public string KeywordString
         {
-            get => Keyword.GetKeyword;
+            get => App.keyword.KeywordString;
         }
 
         private bool _isEncrypted;
@@ -56,7 +58,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog.FileName))
                 {
                     file.WriteLine(message.MessageString);
-                    file.WriteLine(Keyword.GetKeyword);
+                    file.WriteLine(App.keyword.KeywordString);
                 }
             }
 

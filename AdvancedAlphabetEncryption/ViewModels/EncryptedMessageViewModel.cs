@@ -19,7 +19,8 @@ namespace AdvancedAlphabetEncryption.ViewModels
         
         public EncryptedMessageViewModel()
         {
-            _encryptedMessage.Keyword = Keyword.GetKeyword;
+            _encryptedMessage.Keyword = App.keyword.KeywordString;
+            _encryptedMessage.CreatedBy = App.agent.Initials;
         }
         
         public string MessageString
@@ -50,10 +51,19 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 IsEncrypted = true;
 
                 OnPropertyChanged("MessageString");
+
+                SaveToDatabase();
             }
 
             if (SaveToFileChecked)
                 SaveToFile(_encryptedMessage);
+
+        }
+
+        private void SaveToDatabase()
+        {
+            db.EncryptedMessages.Add(_encryptedMessage);
+            db.SaveChanges();
         }
         
     }
