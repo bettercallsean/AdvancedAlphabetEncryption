@@ -22,6 +22,11 @@ namespace AdvancedAlphabetEncryption.Models
             Email = email;
         }
 
+        public Agent()
+        {
+
+        }
+
         [Key]
         public int AgentID { get; set; }
 
@@ -71,7 +76,7 @@ namespace AdvancedAlphabetEncryption.Models
         {
             get => _email;
 
-            private set
+            set
             {
                 try
                 {
