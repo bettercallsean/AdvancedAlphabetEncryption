@@ -86,11 +86,13 @@
     <Compile Include="Migrations\201904291801347_InitialMigration.Designer.cs">
       <DependentUpon>201904291801347_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904301256084_AddSetByToKeyword.cs" />
+    <Compile Include="Migrations\201904301256084_AddSetByToKeyword.Designer.cs">
+      <DependentUpon>201904301256084_AddSetByToKeyword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\DecryptedMessageViewModel.cs" />
-    <Compile Include="ViewModels\EncryptDecryptViewModel.cs" />
     <Compile Include="ViewModels\EncryptedMessageViewModel.cs" />
-    <Compile Include="ViewModels\MessageDatabaseViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="View\MessageDatabaseView.xaml.cs">
       <DependentUpon>MessageDatabaseView.xaml</DependentUpon>
@@ -168,6 +170,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904291801347_InitialMigration.resx">
       <DependentUpon>201904291801347_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904301256084_AddSetByToKeyword.resx">
+      <DependentUpon>201904301256084_AddSetByToKeyword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

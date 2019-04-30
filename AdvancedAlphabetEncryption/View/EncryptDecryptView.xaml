@@ -6,16 +6,16 @@
              xmlns:local="clr-namespace:AdvancedAlphabetEncryption"
              xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="550">
+             d:DesignHeight="400" d:DesignWidth="600">
 
     <UserControl.Resources>
         <viewmodel:EncryptedMessageViewModel x:Key="EncryptedMessageViewModel"/>
         <viewmodel:DecryptedMessageViewModel x:Key="DecryptedMessageViewModel"/>
     </UserControl.Resources>
 
-    <StackPanel Margin="5, 0" Background="White">
+    <StackPanel Margin="10" Background="White">
         <!--Encrypt-->
-        <StackPanel DataContext="{Binding Source={StaticResource EncryptedMessageViewModel}}">
+        <StackPanel DataContext="{Binding Source={StaticResource EncryptedMessageViewModel}}" Margin="0, 0, 0, 20">
             <TextBlock>Encrypt</TextBlock>
             <TextBox Text="{Binding Path=MessageString, Mode=TwoWay}" Height="100" Margin="0, 5"/>
 
