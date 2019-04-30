@@ -7,9 +7,10 @@
              xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="550">
-    
-    <StackPanel Background="Beige" Width="550">
-        <Label Content="HEY NOW BROWN COW" FontSize="50"/>
+
+    <StackPanel Background="White" Margin="20">
+        <Label Content="Messages" FontSize="18"/>
+        <DataGrid />
     </StackPanel>
     
 </UserControl>
