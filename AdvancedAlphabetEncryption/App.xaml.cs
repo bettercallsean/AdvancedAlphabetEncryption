@@ -18,11 +18,12 @@ namespace AdvancedAlphabetEncryption
     {
         public static Agent agent;
         public static Keyword keyword = new Keyword();
-        private void StartupTask(object sender, StartupEventArgs e)
+        private void Application_Startup(object sender, StartupEventArgs e)
         {
             agent = new Agent("sean", "edwards", "seanedwards97@gmail.com");
             SetKeyword();
         }
+
         private void SetKeyword()
         {
             // Retrieves the last Keyword stored in the datbase
@@ -42,5 +43,9 @@ namespace AdvancedAlphabetEncryption
                 db.SaveChanges();
             }
         }
+
+        
+
+        
     }
 }
