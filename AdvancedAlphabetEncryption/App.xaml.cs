@@ -21,7 +21,6 @@ namespace AdvancedAlphabetEncryption
         private void StartupTask(object sender, StartupEventArgs e)
         {
             agent = new Agent("sean", "edwards", "seanedwards97@gmail.com");
-            keyword.SetBy = agent.Initials;
             SetKeyword();
         }
         private void SetKeyword()
@@ -29,14 +28,15 @@ namespace AdvancedAlphabetEncryption
             // Retrieves the last Keyword stored in the datbase
             using (var db = new AdvancedAlphabetEncryptionContext())
             {
-                var query = db.Keyword.OrderByDescending(p => p.DaySet).FirstOrDefault();
+                keyword = db.Keyword.OrderByDescending(p => p.DaySet).FirstOrDefault();
 
                 // If the query is not a null value and the date is still the same, then the same keyword
                 // is used
-                if (!(query is null) && query.DaySet.DayOfYear == DateTime.Now.DayOfYear)
+                if (!(keyword is null) && keyword.DaySet.DayOfYear == DateTime.Now.DayOfYear)
                     return;
 
                 keyword.GenerateRandomKeyword();
+                keyword.SetBy = agent.Initials;
                 db.Keyword.Add(keyword);
 
                 db.SaveChanges();
