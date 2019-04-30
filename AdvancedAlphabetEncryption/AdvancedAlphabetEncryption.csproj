@@ -82,6 +82,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AlphabetEncryptionDbContext\AdvancedAlphabetEncryptionContext.cs" />
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201904291801347_InitialMigration.cs" />
     <Compile Include="Migrations\201904291801347_InitialMigration.Designer.cs">
       <DependentUpon>201904291801347_InitialMigration.cs</DependentUpon>
@@ -91,12 +94,17 @@
       <DependentUpon>201904301256084_AddSetByToKeyword.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\DecryptedMessageViewModel.cs" />
     <Compile Include="ViewModels\EncryptedMessageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="View\MessageDatabaseView.xaml.cs">
       <DependentUpon>MessageDatabaseView.xaml</DependentUpon>
     </Compile>
+    <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EncryptDecryptView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
