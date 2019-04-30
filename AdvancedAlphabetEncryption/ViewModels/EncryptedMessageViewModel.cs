@@ -34,9 +34,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
                     if (IsEncrypted)
                         IsEncrypted = false;
-
-                    OnPropertyChanged();
                 }
+
+                OnPropertyChanged();
             }
         }
 
@@ -44,9 +44,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         public void EncryptMessage()
         {
-            if (SaveToFileChecked)
-                SaveToFile(_encryptedMessage);
-
             if (!IsEncrypted)
             {
                 _encryptedMessage.Encrypt();
@@ -54,6 +51,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
                 OnPropertyChanged("MessageString");
             }
+
+            if (SaveToFileChecked)
+                SaveToFile(_encryptedMessage);
         }
         
     }
