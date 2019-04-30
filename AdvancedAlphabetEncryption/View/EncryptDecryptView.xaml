@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="AdvancedAlphabetEncryption.View.EncryptDecryptView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AdvancedAlphabetEncryption"
+             xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="550">
+
+    <UserControl.Resources>
+        <viewmodel:EncryptedMessageViewModel x:Key="EncryptedMessageViewModel"/>
+        <viewmodel:DecryptedMessageViewModel x:Key="DecryptedMessageViewModel"/>
+    </UserControl.Resources>
+
+    <StackPanel Margin="5, 0" Background="White">
+        <!--Encrypt-->
+        <StackPanel DataContext="{Binding Source={StaticResource EncryptedMessageViewModel}}">
+            <TextBlock>Encrypt</TextBlock>
+            <TextBox Text="{Binding Path=MessageString, Mode=TwoWay}" Height="100" Margin="0, 5"/>
+
+            <DockPanel HorizontalAlignment="Right">
+                <Button Command="{Binding EncryptCommand}" Height="20" Width="80" Content="Encrypt" DockPanel.Dock="Right"/>
+                <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0" DockPanel.Dock="Right"/>
+            </DockPanel>
+        </StackPanel>
+
+        <!--Decrypt-->
+        <StackPanel DataContext="{Binding Source={StaticResource DecryptedMessageViewModel}}">
+            <TextBlock>Decrypt</TextBlock>
+            <TextBox Text="{Binding Path=MessageString, Mode=TwoWay}" Height="100" Margin="0, 5"/>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Decryption keyword:" Padding="0, 0, 10, 0" Grid.Column="0"/>
+                <TextBox Width="100" Text="{Binding Path=Keyword, Mode=TwoWay}" Grid.Column="1" />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
+                    <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0" />
+                    <Button Command="{Binding DecryptCommand}" Height="20" Width="80" Content="Decrypt" />
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+    </StackPanel>
+</UserControl>
