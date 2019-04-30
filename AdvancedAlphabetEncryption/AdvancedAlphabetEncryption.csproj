@@ -88,8 +88,17 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\DecryptedMessageViewModel.cs" />
+    <Compile Include="ViewModels\EncryptDecryptViewModel.cs" />
     <Compile Include="ViewModels\EncryptedMessageViewModel.cs" />
+    <Compile Include="ViewModels\MessageDatabaseViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="View\MessageDatabaseView.xaml.cs">
+      <DependentUpon>MessageDatabaseView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\EncryptDecryptView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -98,10 +107,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\EncryptDecryptView.xaml.cs">
+      <DependentUpon>EncryptDecryptView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\MessageDatabaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Agent.cs" />
