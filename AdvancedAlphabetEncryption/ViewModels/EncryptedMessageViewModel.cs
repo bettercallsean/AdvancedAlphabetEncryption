@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using AdvancedAlphabetEncryption.AlphabetEncryptionDbContext;
 using AdvancedAlphabetEncryption.Models;
 using AdvancedAlphabetEncryption.Models.Messages;
 using Microsoft.Win32;
@@ -62,8 +63,11 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         private void SaveToDatabase()
         {
-            db.EncryptedMessages.Add(_encryptedMessage);
-            db.SaveChanges();
+            using (var db = new AdvancedAlphabetEncryptionContext())
+            {
+                db.EncryptedMessages.Add(_encryptedMessage);
+                db.SaveChanges();
+            }
         }
         
     }

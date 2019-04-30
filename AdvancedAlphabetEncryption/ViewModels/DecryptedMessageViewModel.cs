@@ -1,4 +1,5 @@
-﻿using AdvancedAlphabetEncryption.Models;
+﻿using AdvancedAlphabetEncryption.AlphabetEncryptionDbContext;
+using AdvancedAlphabetEncryption.Models;
 using AdvancedAlphabetEncryption.Models.Messages;
 using Microsoft.Win32;
 using System;
@@ -90,8 +91,11 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         private void SaveToDatabase()
         {
-            db.DecryptedMessages.Add(_decryptedMessage);
-            db.SaveChanges();
+            using (var db = new AdvancedAlphabetEncryptionContext())
+            {
+                db.DecryptedMessages.Add(_decryptedMessage);
+                db.SaveChanges();
+            }
         }
     }
 }

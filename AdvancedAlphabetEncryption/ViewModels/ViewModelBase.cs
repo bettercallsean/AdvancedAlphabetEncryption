@@ -14,7 +14,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
-        public AdvancedAlphabetEncryptionContext db = new AdvancedAlphabetEncryptionContext();
         public string KeywordString
         {
             get => App.keyword.KeywordString;
