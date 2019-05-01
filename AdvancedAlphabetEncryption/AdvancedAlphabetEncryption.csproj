@@ -51,6 +51,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -82,7 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AlphabetEncryptionDbContext\AdvancedAlphabetEncryptionContext.cs" />
-    <Compile Include="LoginWindow.xaml.cs">
+    <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201904291801347_InitialMigration.cs" />
@@ -93,15 +96,31 @@
     <Compile Include="Migrations\201904301256084_AddSetByToKeyword.Designer.cs">
       <DependentUpon>201904301256084_AddSetByToKeyword.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904301857442_AddAgentTable.cs" />
+    <Compile Include="Migrations\201904301857442_AddAgentTable.Designer.cs">
+      <DependentUpon>201904301857442_AddAgentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904301910504_AddPasswordProperty.cs" />
+    <Compile Include="Migrations\201904301910504_AddPasswordProperty.Designer.cs">
+      <DependentUpon>201904301910504_AddPasswordProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904302015056_EncryptAgentPassword.cs" />
+    <Compile Include="Migrations\201904302015056_EncryptAgentPassword.Designer.cs">
+      <DependentUpon>201904302015056_EncryptAgentPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904302053540_EncryptAgentPasswordPart2.cs" />
+    <Compile Include="Migrations\201904302053540_EncryptAgentPasswordPart2.Designer.cs">
+      <DependentUpon>201904302053540_EncryptAgentPasswordPart2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\Hashing.cs" />
     <Compile Include="ViewModels\DecryptedMessageViewModel.cs" />
     <Compile Include="ViewModels\EncryptedMessageViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="View\MessageDatabaseView.xaml.cs">
       <DependentUpon>MessageDatabaseView.xaml</DependentUpon>
     </Compile>
-    <Page Include="LoginWindow.xaml">
+    <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,13 +193,24 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904291801347_InitialMigration.resx">
       <DependentUpon>201904291801347_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904301256084_AddSetByToKeyword.resx">
       <DependentUpon>201904301256084_AddSetByToKeyword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904301857442_AddAgentTable.resx">
+      <DependentUpon>201904301857442_AddAgentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904301910504_AddPasswordProperty.resx">
+      <DependentUpon>201904301910504_AddPasswordProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904302015056_EncryptAgentPassword.resx">
+      <DependentUpon>201904302015056_EncryptAgentPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904302053540_EncryptAgentPasswordPart2.resx">
+      <DependentUpon>201904302053540_EncryptAgentPasswordPart2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
