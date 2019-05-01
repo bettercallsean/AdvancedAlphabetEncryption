@@ -14,16 +14,16 @@ using Microsoft.Win32;
 
 namespace AdvancedAlphabetEncryption.ViewModels
 {
-    public class EncryptedMessageViewModel : BaseViewModel
+    public class EncryptedMessageViewModel : MessageViewModel
     {
         readonly private EncryptedMessage _encryptedMessage = new EncryptedMessage();
-        
+
         public EncryptedMessageViewModel()
         {
             _encryptedMessage.Keyword = App.keyword.KeywordString;
             _encryptedMessage.CreatedBy = App.agent.Initials;
         }
-        
+
         public string MessageString
         {
             get => _encryptedMessage.MessageString;
@@ -69,9 +69,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 db.SaveChanges();
             }
         }
-        
+
     }
 
-    
+
 
 }

@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace AdvancedAlphabetEncryption.ViewModels
 {
-    public class DecryptedMessageViewModel : BaseViewModel
+    public class DecryptedMessageViewModel : MessageViewModel
     {
         readonly private DecryptedMessage _decryptedMessage = new DecryptedMessage();
 
@@ -62,7 +62,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 }
                 // If there is no text in the textbox, the keyword is reverted to the default
                 else
-                    _decryptedMessage.Keyword = App.keyword.KeywordString; 
+                    _decryptedMessage.Keyword = App.keyword.KeywordString;
 
                 OnPropertyChanged();
             }
@@ -73,9 +73,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         public void DecryptMessage()
         {
-            if (SaveToFileChecked)
-                SaveToFile(_decryptedMessage);
-
             // If a valid keyword has been entered (any alphabetical characters), then the program can proceed
             // with the decryption process
             if (IsEncrypted)
@@ -87,6 +84,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
                 SaveToDatabase();
             }
+
+            if (SaveToFileChecked)
+                SaveToFile(_decryptedMessage);
         }
 
         private void SaveToDatabase()
