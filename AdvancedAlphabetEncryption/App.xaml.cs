@@ -1,5 +1,7 @@
 ﻿using AdvancedAlphabetEncryption.AlphabetEncryptionDbContext;
 using AdvancedAlphabetEncryption.Models;
+using AdvancedAlphabetEncryption.ViewModels;
+using AdvancedAlphabetEncryption.View;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,11 +18,12 @@ namespace AdvancedAlphabetEncryption
     /// </summary>
     public partial class App : Application
     {
-        public static Agent agent;
+        public static Agent agent = new Agent();
         public static Keyword keyword = new Keyword();
+        
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            agent = new Agent("sean", "edwards", "seanedwards97@gmail.com");
             SetKeyword();
         }
 
@@ -43,9 +46,5 @@ namespace AdvancedAlphabetEncryption
                 db.SaveChanges();
             }
         }
-
-        
-
-        
     }
 }
