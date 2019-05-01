@@ -20,10 +20,10 @@ namespace AdvancedAlphabetEncryption
     {
         public static Agent agent = new Agent();
         public static Keyword keyword = new Keyword();
-        
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            agent = new Agent("sean", "edwards", "seanedwards97@gmail.com", "testpassword");
             SetKeyword();
         }
 
