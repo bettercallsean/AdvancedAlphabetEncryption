@@ -7,10 +7,21 @@
              xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="550">
-
-    <StackPanel Background="White" Margin="20">
+    
+    <UserControl.Resources>
+        <viewmodel:MessageDatabaseViewModel x:Key="MessageDatabaseViewModel"/>
+    </UserControl.Resources>
+    
+    <StackPanel Background="White" Margin="20" DataContext="{Binding Source={StaticResource MessageDatabaseViewModel}}">
         <Label Content="Messages" FontSize="18"/>
-        <DataGrid />
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Height="200" CanUserAddRows="False" ItemsSource="{Binding Messages}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Test" Binding="{Binding MessageString}"/>
+                <DataGridTextColumn Header="Test" Binding="{Binding Keyword}"/>
+                <DataGridTextColumn Header="Test" Binding="{Binding CreatedBy}"/>
+                <DataGridTextColumn Header="Test" Binding="{Binding CreationDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </StackPanel>
     
 </UserControl>
