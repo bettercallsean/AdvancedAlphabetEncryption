@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace AdvancedAlphabetEncryption.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public string KeywordString
         {
