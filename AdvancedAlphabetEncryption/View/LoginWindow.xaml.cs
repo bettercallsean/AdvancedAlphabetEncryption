@@ -31,6 +31,9 @@ namespace AdvancedAlphabetEncryption
         {
             string email = emailBox.Text;
 
+            if (emailBox == null || passwordBox == null)
+                MessageBox.Show("Please enter a username and password");
+
             using (var db = new AdvancedAlphabetEncryptionContext())
             {
                 var query = db.Agent.Where(b => b.Email == email).FirstOrDefault();
@@ -41,6 +44,9 @@ namespace AdvancedAlphabetEncryption
                     mainWindow.Show();
                     Close();
                 }
+                else
+                    loginErrorTextBlock.Visibility = Visibility.Visible;
+                
             }
         }
     }

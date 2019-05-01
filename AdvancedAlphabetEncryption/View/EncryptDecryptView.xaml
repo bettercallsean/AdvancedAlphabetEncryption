@@ -9,17 +9,21 @@
              d:DesignHeight="400" d:DesignWidth="600">
 
     <UserControl.Resources>
+        <viewmodel:MessageViewModel x:Key="MessageViewModel"/>
         <viewmodel:EncryptedMessageViewModel x:Key="EncryptedMessageViewModel"/>
         <viewmodel:DecryptedMessageViewModel x:Key="DecryptedMessageViewModel"/>
     </UserControl.Resources>
+    
+    
+    <!--DataContext="{Binding Source={StaticResource MessageViewModel}}"-->
 
     <StackPanel Margin="10" Background="White">
         <!--Encrypt-->
-        <StackPanel DataContext="{Binding Source={StaticResource EncryptedMessageViewModel}}" Margin="0, 0, 0, 20">
+        <StackPanel Margin="0, 0, 0, 20" DataContext="{Binding Source={StaticResource EncryptedMessageViewModel}}">
             <TextBlock>Encrypt</TextBlock>
             <TextBox Text="{Binding Path=MessageString, Mode=TwoWay}" Height="100" Margin="0, 5"/>
 
-            <DockPanel HorizontalAlignment="Right">
+            <DockPanel HorizontalAlignment="Right" >
                 <Button Command="{Binding EncryptCommand}" Height="20" Width="80" Content="Encrypt" DockPanel.Dock="Right"/>
                 <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0" DockPanel.Dock="Right"/>
             </DockPanel>
@@ -41,7 +45,7 @@
                 <TextBlock Text="Decryption keyword:" Padding="0, 0, 10, 0" Grid.Column="0"/>
                 <TextBox Width="100" Text="{Binding Path=Keyword, Mode=TwoWay}" Grid.Column="1" />
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2" >
                     <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0" />
                     <Button Command="{Binding DecryptCommand}" Height="20" Width="80" Content="Decrypt" />
                 </StackPanel>

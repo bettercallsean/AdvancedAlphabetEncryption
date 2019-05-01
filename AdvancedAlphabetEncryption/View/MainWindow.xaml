@@ -11,7 +11,6 @@
 
     <Window.Resources>
         <viewmodel:EncryptedMessageViewModel x:Key="EncryptedMessageViewModel"/>
-        <viewmodel:DecryptedMessageViewModel x:Key="DecryptedMessageViewModel"/>
 
         <view:EncryptDecryptView x:Key="EncryptDecryptView" />
         <view:MessageDatabaseView x:Key="MessageDatabaseView" />
