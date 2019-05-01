@@ -14,7 +14,7 @@ using Microsoft.Win32;
 
 namespace AdvancedAlphabetEncryption.ViewModels
 {
-    public class EncryptedMessageViewModel : ViewModelBase
+    public class EncryptedMessageViewModel : BaseViewModel
     {
         readonly private EncryptedMessage _encryptedMessage = new EncryptedMessage();
         

@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace AdvancedAlphabetEncryption.ViewModels
 {
-    public class DecryptedMessageViewModel : ViewModelBase
+    public class DecryptedMessageViewModel : BaseViewModel
     {
         readonly private DecryptedMessage _decryptedMessage = new DecryptedMessage();
 
