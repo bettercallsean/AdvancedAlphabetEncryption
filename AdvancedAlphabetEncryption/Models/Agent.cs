@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,11 +17,12 @@ namespace AdvancedAlphabetEncryption.Models
         private char[] _initials = new char[2];
 
 
-        public Agent(string firstName, string lastName, string email)
+        public Agent(string firstName, string lastName, string email, string password)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
+            Password = password;
         }
 
         public Agent()
@@ -67,8 +70,6 @@ namespace AdvancedAlphabetEncryption.Models
                 {
                     return "";
                 }
-
-                
             }
         }
 
@@ -89,6 +90,24 @@ namespace AdvancedAlphabetEncryption.Models
             }
         }
 
+        public virtual string PasswordStored
+        {
+            get;
+            set;
+        }
+
+        [NotMapped]
+        public string Password
+        {
+            set => PasswordStored = Hashing.HashPassword(value); 
+        }
+
+        public bool ValidPassword(string password)
+        {
+            return Hashing.ValidatePassword(password, PasswordStored);
+        }
+
+
         public void DisplayInformation()
         {
             Console.WriteLine("------------------");
@@ -98,4 +117,6 @@ namespace AdvancedAlphabetEncryption.Models
         }
 
     }
+
+    
 }
