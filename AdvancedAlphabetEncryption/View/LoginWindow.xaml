@@ -7,19 +7,24 @@
         xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
         mc:Ignorable="d"
         Title="LoginWindow" Height="450" Width="400">
-
+    <Window.DataContext>
+        <viewmodel:LoginViewModel x:Name="LoginViewModel"/>
+    </Window.DataContext>
+    <Window.Resources>
+        <viewmodel:LoginViewModel x:Key="LoginViewModel"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+    </Window.Resources>
     <Grid>
         <StackPanel Margin="20">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="200">
                 <TextBlock Text="Login to your account" FontSize="18" Margin="0, 0, 0, 60" HorizontalAlignment="Center"/>
                 <TextBlock Text="Email"/>
-                <TextBox Name="emailBox"  Margin="0, 0, 0, 10"/>
+                <TextBox Text="{Binding Email, Mode=OneWayToSource}"  Margin="0, 0, 0, 10"/>
                 <TextBlock Text="Password" />
                 <PasswordBox Name="passwordBox"  Margin="0, 0, 0, 20" />
                 <TextBlock Name="loginErrorTextBlock" Text="Check Email/Password and try again" 
-                           HorizontalAlignment="Center" Foreground="Red" Margin="0, 0, 0, 10" Visibility="Hidden"/>
-                <Button Content="Login" Width="100" Click="Login">
-                </Button>
+                           HorizontalAlignment="Center" Foreground="Red" Margin="0, 0, 0, 10" Visibility="{Binding SuccessfulLogin, Converter={StaticResource BoolToVisConverter}}"/>
+                <Button Content="Login" Width="100" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=passwordBox, Mode=OneWay}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

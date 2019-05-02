@@ -25,29 +25,8 @@ namespace AdvancedAlphabetEncryption
         public LoginWindow()
         {
             InitializeComponent();
-        }
 
-        public void Login(object sender, RoutedEventArgs e)
-        {
-            string email = emailBox.Text;
-
-            if (emailBox == null || passwordBox == null)
-                MessageBox.Show("Please enter a username and password");
-
-            using (var db = new AdvancedAlphabetEncryptionContext())
-            {
-                var query = db.Agent.Where(b => b.Email == email).FirstOrDefault();
-                if (query.ValidPassword(passwordBox.Password))
-                {
-                    App.agent = query;
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
-                    Close();
-                }
-                else
-                    loginErrorTextBlock.Visibility = Visibility.Visible;
-                
-            }
+            LoginViewModel.ClosingRequest += (sender, e) => Close();
         }
     }
 }
