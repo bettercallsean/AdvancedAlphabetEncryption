@@ -7,9 +7,7 @@
         xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
         mc:Ignorable="d"
         Title="LoginWindow" Height="450" Width="400">
-    <Window.DataContext>
-        <viewmodel:LoginViewModel/>
-    </Window.DataContext>
+
     <Grid>
         <StackPanel Margin="20">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="200">

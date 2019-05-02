@@ -14,17 +14,19 @@
 
         <view:EncryptDecryptView x:Key="EncryptDecryptView" />
         <view:MessageDatabaseView x:Key="MessageDatabaseView" />
+        <view:AgentDisplayView x:Key="AgentDisplayView" />
     </Window.Resources>
 
     <DockPanel Margin="20">
-        <TabControl Width="550" BorderThickness="1">
+        <TabControl Width="530" BorderThickness="1">
             <TabItem Header="Encrypt/Decrypt" Content="{StaticResource EncryptDecryptView}"/>
             <TabItem Header="ThisIsATest" Content="{StaticResource MessageDatabaseView}"/>
         </TabControl>
         
-        <Border BorderBrush="Black" BorderThickness="1" Padding="2">
+        <Border BorderBrush="Black" BorderThickness="0" Padding="2">
             
-            <StackPanel DataContext="{Binding Source={StaticResource EncryptedMessageViewModel}}">
+            <StackPanel>
+                <ContentControl Content="{StaticResource AgentDisplayView}"/>
                 <TextBlock Text="{Binding Path=KeywordString, StringFormat=Keyword: {0}}" />
             </StackPanel>
         </Border>
