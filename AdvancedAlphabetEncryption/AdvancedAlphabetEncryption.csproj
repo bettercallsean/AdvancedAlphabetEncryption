@@ -92,7 +92,9 @@
     </Compile>
     <Compile Include="Utilities\ImageConverter.cs" />
     <Compile Include="ViewModels\AgentViewModel.cs" />
+    <Compile Include="ViewModels\CloseableViewModel.cs" />
     <Compile Include="ViewModels\KeywordViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MessageDatabaseViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModels\MessageViewModel.cs" />
     <Compile Include="View\AgentDisplayView.xaml.cs">
