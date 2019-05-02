@@ -90,6 +90,7 @@
     <Compile Include="Migrations\201905021208336_AddProfilePicture.Designer.cs">
       <DependentUpon>201905021208336_AddProfilePicture.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\ImageConverter.cs" />
     <Compile Include="ViewModels\AgentViewModel.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
