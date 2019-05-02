@@ -66,6 +66,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -85,9 +86,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AlphabetEncryptionDbContext\AdvancedAlphabetEncryptionContext.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="Migrations\201905021208336_AddProfilePicture.cs" />
+    <Compile Include="Migrations\201905021208336_AddProfilePicture.Designer.cs">
+      <DependentUpon>201905021208336_AddProfilePicture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ImageConverter.cs" />
+    <Compile Include="ViewModels\AgentViewModel.cs" />
+    <Compile Include="ViewModels\KeywordViewModel.cs" />
     <Compile Include="ViewModels\MessageDatabaseViewModel.cs" />
-    <Compile Include="ViewModels\MessageViewModel.cs" />
+    <Compile Include="ViewModels\MessageViewModels\MessageViewModel.cs" />
+    <Compile Include="View\AgentDisplayView.xaml.cs">
+      <DependentUpon>AgentDisplayView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -116,13 +126,17 @@
       <DependentUpon>201904302053540_EncryptAgentPasswordPart2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Hashing.cs" />
-    <Compile Include="ViewModels\DecryptedMessageViewModel.cs" />
-    <Compile Include="ViewModels\EncryptedMessageViewModel.cs" />
+    <Compile Include="Utilities\Hashing.cs" />
+    <Compile Include="ViewModels\MessageViewModels\DecryptedMessageViewModel.cs" />
+    <Compile Include="ViewModels\MessageViewModels\EncryptedMessageViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="View\MessageDatabaseView.xaml.cs">
       <DependentUpon>MessageDatabaseView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AgentDisplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,7 +172,7 @@
     <Compile Include="Models\Keyword.cs" />
     <Compile Include="Models\Messages\DecryptedMessage.cs" />
     <Compile Include="Models\Messages\EncryptedMessage.cs" />
-    <Compile Include="Models\PoemWriter.cs" />
+    <Compile Include="Utilities\PoemWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -214,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904302053540_EncryptAgentPasswordPart2.resx">
       <DependentUpon>201904302053540_EncryptAgentPasswordPart2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905021208336_AddProfilePicture.resx">
+      <DependentUpon>201905021208336_AddProfilePicture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
