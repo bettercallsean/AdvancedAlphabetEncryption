@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AdvancedAlphabetEncryption"
              Startup="Application_Startup"
-             StartupUri="View/MainWindow.xaml">
+             StartupUri="View/LoginWindow.xaml">
 
     <Application.Resources>
          

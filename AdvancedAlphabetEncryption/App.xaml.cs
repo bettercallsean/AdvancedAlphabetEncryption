@@ -23,7 +23,6 @@ namespace AdvancedAlphabetEncryption
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            agent = new Agent("sean", "edwards", "seanedwards97@gmail.com", "testpassword");
             SetKeyword();
         }
 
