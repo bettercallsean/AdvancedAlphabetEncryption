@@ -12,14 +12,14 @@
         <viewmodel:MessageDatabaseViewModel x:Key="MessageDatabaseViewModel"/>
     </UserControl.Resources>
     
-    <StackPanel Background="White" Margin="20" DataContext="{Binding Source={StaticResource MessageDatabaseViewModel}}">
+    <StackPanel Background="White" DataContext="{Binding Source={StaticResource MessageDatabaseViewModel}}">
         <Label Content="Messages" FontSize="18"/>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Height="200" CanUserAddRows="False" ItemsSource="{Binding Messages}">
+        <DataGrid SelectionUnit="Cell" AutoGenerateColumns="False" IsReadOnly="True" Height="200" CanUserAddRows="False" ItemsSource="{Binding Messages}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Test" Binding="{Binding MessageString}"/>
-                <DataGridTextColumn Header="Test" Binding="{Binding Keyword}"/>
-                <DataGridTextColumn Header="Test" Binding="{Binding CreatedBy}"/>
-                <DataGridTextColumn Header="Test" Binding="{Binding CreationDate}"/>
+                <DataGridTextColumn Width="290" Header="Message" Binding="{Binding MessageString}"/>
+                <DataGridTextColumn Header="Keyword" Binding="{Binding Keyword}"/>
+                <DataGridTextColumn Header="Author" Binding="{Binding CreatedBy}"/>
+                <DataGridTextColumn Header="Date Written" Binding="{Binding CreationDate, StringFormat=\{0:MM/dd/yyyy hh:mm tt\}}"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

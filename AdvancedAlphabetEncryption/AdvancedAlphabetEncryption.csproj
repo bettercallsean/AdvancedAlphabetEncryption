@@ -85,7 +85,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AlphabetEncryptionDbContext\AdvancedAlphabetEncryptionContext.cs" />
-    <Compile Include="Models\MessageDatabaseAccess.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MessageDatabaseViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />

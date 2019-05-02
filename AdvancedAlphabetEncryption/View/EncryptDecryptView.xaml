@@ -13,9 +13,6 @@
         <viewmodel:EncryptedMessageViewModel x:Key="EncryptedMessageViewModel"/>
         <viewmodel:DecryptedMessageViewModel x:Key="DecryptedMessageViewModel"/>
     </UserControl.Resources>
-    
-    
-    <!--DataContext="{Binding Source={StaticResource MessageViewModel}}"-->
 
     <StackPanel Margin="10" Background="White">
         <!--Encrypt-->
