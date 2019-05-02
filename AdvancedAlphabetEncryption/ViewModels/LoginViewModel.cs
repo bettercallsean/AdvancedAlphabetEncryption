@@ -20,11 +20,11 @@ namespace AdvancedAlphabetEncryption.ViewModels
             set { _email = value; OnPropertyChanged(); }
         }
 
-        private bool _successfulLogin;
-        public bool SuccessfulLogin
+        private bool _failedLogin = false;
+        public bool FailedLogin
         {
-            get => _successfulLogin;
-            set { _successfulLogin = value; OnPropertyChanged(); }
+            get => _failedLogin;
+            set { _failedLogin = value; OnPropertyChanged(); }
         }
 
         public ICommand LoginCommand { get => new RelayCommand(o => Login(o)); }
@@ -39,17 +39,19 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
                 if (query != null && query.ValidPassword(passwordBox.Password))
                 {
-                    SuccessfulLogin = true;
+                    FailedLogin = false;
                     App.agent = query;
 
+                    //I know that this isn't MVVM compliant, however it's used only once and people on StackOverflow etc. seem to agree that 
+                    // it isn't worth the extra setup for just a simple onetime action.
                     Application.Current.MainWindow = new MainWindow();
                     Application.Current.MainWindow.Show();
 
                     OnClosingRequest();
 
                 }
-                else
-                    SuccessfulLogin = false;
+                
+                FailedLogin = true;
                 
 
             }
