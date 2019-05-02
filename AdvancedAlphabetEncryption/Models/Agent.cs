@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Cryptography;
@@ -14,15 +15,16 @@ namespace AdvancedAlphabetEncryption.Models
     public class Agent
     {
         private string _firstName, _lastName, _email;
-        private char[] _initials = new char[2];
+        readonly private char[] _initials = new char[2];
 
 
-        public Agent(string firstName, string lastName, string email, string password)
+        public Agent(string firstName, string lastName, string email, string password, byte[] image = null)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
+            ProfilePicture = image;
         }
 
         public Agent()
@@ -59,17 +61,12 @@ namespace AdvancedAlphabetEncryption.Models
         {
             get
             {
-                try
-                {
+
                     _initials[0] = char.ToUpper(_firstName[0]);
                     _initials[1] = char.ToUpper(_lastName[0]);
 
                     return new string(_initials);
-                }
-                catch(NullReferenceException)
-                {
-                    return "";
-                }
+            
             }
         }
 
@@ -90,6 +87,8 @@ namespace AdvancedAlphabetEncryption.Models
             }
         }
 
+        public byte[] ProfilePicture { get; set; }
+
         public virtual string PasswordStored
         {
             get;
@@ -105,15 +104,6 @@ namespace AdvancedAlphabetEncryption.Models
         public bool ValidPassword(string password)
         {
             return Hashing.ValidatePassword(password, PasswordStored);
-        }
-
-
-        public void DisplayInformation()
-        {
-            Console.WriteLine("------------------");
-            Console.WriteLine("Agent Name: {0} {1}", FirstName, LastName);
-            Console.WriteLine("Initials: {0}", Initials);
-            Console.WriteLine("Email: {0}", Email);
         }
 
     }
