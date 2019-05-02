@@ -20,7 +20,7 @@
     <DockPanel Margin="20">
         <TabControl Width="530" BorderThickness="1">
             <TabItem Header="Encrypt/Decrypt" Content="{StaticResource EncryptDecryptView}"/>
-            <TabItem Header="ThisIsATest" Content="{StaticResource MessageDatabaseView}"/>
+            <TabItem Header="View Messages" Content="{StaticResource MessageDatabaseView}"/>
         </TabControl>
         
         <Border BorderBrush="Black" BorderThickness="0" Padding="2">
