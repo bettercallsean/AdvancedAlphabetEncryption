@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdvancedAlphabetEncryption"
         xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
+        xmlns:converter="clr-namespace:AdvancedAlphabetEncryption.Utilities"
         mc:Ignorable="d"
         Title="LoginWindow" Height="450" Width="400">
     <Window.DataContext>
@@ -12,7 +13,7 @@
     </Window.DataContext>
     <Window.Resources>
         <viewmodel:LoginViewModel x:Key="LoginViewModel"/>
-        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Window.Resources>
     <Grid>
         <StackPanel Margin="20">
@@ -23,8 +24,8 @@
                 <TextBlock Text="Password" />
                 <PasswordBox Name="passwordBox"  Margin="0, 0, 0, 20" />
                 <TextBlock Name="loginErrorTextBlock" Text="Check Email/Password and try again" 
-                           HorizontalAlignment="Center" Foreground="Red" Margin="0, 0, 0, 10" Visibility="{Binding SuccessfulLogin, Converter={StaticResource BoolToVisConverter}}"/>
-                <Button Content="Login" Width="100" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=passwordBox, Mode=OneWay}"/>
+                           HorizontalAlignment="Center" Foreground="Red" Visibility="{Binding FailedLogin, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <Button Content="Login" Width="100" Margin="10" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=passwordBox, Mode=OneWay}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
