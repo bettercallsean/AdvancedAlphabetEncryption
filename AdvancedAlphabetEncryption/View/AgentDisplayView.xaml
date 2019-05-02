@@ -27,7 +27,7 @@
 
         <StackPanel DataContext="{Binding Source={StaticResource KeywordViewModel}}">
             <TextBlock Text="{Binding KeywordDate, StringFormat=Keyword for {0}}" HorizontalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
-            <TextBlock Text="{Binding Keyword}" HorizontalAlignment="Center" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Keyword}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="24"/>
             
         </StackPanel>
 
