@@ -13,12 +13,12 @@ namespace AdvancedAlphabetEncryption.Utilities
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value is bool && (bool)value) ? Visibility.Visible : Visibility.Hidden;
+            return (value is bool && (bool)value) ? Visibility.Hidden : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value is Visibility && (Visibility)value == Visibility.Visible;
+            return value is Visibility && (Visibility)value == Visibility.Hidden;
         }
     }
 }
