@@ -24,7 +24,10 @@
         </TabControl>
 
         <Border BorderThickness="1" BorderBrush="Black">
-            <ContentControl Content="{StaticResource AgentDisplayView}" Margin="0, 10"/>
+            <StackPanel>
+                <ContentControl Content="{StaticResource AgentDisplayView}"/>
+                <TextBlock Text="{Binding Path=KeywordString, StringFormat=Keyword: {0}}" />
+            </StackPanel>
         </Border>
 
     </DockPanel>
