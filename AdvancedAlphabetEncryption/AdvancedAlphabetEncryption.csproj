@@ -90,6 +90,14 @@
     <Compile Include="Migrations\201905021208336_AddProfilePicture.Designer.cs">
       <DependentUpon>201905021208336_AddProfilePicture.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905031903001_AddValidVerifiersToKeyword.cs" />
+    <Compile Include="Migrations\201905031903001_AddValidVerifiersToKeyword.Designer.cs">
+      <DependentUpon>201905031903001_AddValidVerifiersToKeyword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905041352171_SlimKeywordModel.cs" />
+    <Compile Include="Migrations\201905041352171_SlimKeywordModel.Designer.cs">
+      <DependentUpon>201905041352171_SlimKeywordModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\ImageConverter.cs" />
     <Compile Include="ViewModels\AgentViewModel.cs" />
@@ -100,6 +108,9 @@
     <Compile Include="ViewModels\MessageViewModels\MessageViewModel.cs" />
     <Compile Include="View\AgentDisplayView.xaml.cs">
       <DependentUpon>AgentDisplayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KeywordGeneratorWindow.xaml.cs">
+      <DependentUpon>KeywordGeneratorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -137,6 +148,10 @@
       <DependentUpon>MessageDatabaseView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\AgentDisplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\KeywordGeneratorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -234,6 +249,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905021208336_AddProfilePicture.resx">
       <DependentUpon>201905021208336_AddProfilePicture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905031903001_AddValidVerifiersToKeyword.resx">
+      <DependentUpon>201905031903001_AddValidVerifiersToKeyword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905041352171_SlimKeywordModel.resx">
+      <DependentUpon>201905041352171_SlimKeywordModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
