@@ -63,6 +63,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
         public DateTime KeywordDaySet { get; private set; }
         #endregion
 
+        public bool GenerateCustomKeywordChecked { get; set; } = false;
+
+        #region CustomKeywordProperties
         // Used to fill the poem combobox
         public ObservableCollection<string> Poems { get; set; }
         private string _poemSelection;
@@ -98,10 +101,18 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 OnPropertyChanged();
             }
         }
+        #endregion
 
         public ICommand GenerateKeywordCommand { get => new RelayCommand(o => GenerateKeyword()); }
 
         public void GenerateKeyword()
+        {
+            if (GenerateCustomKeywordChecked)
+                GenerateCustomKeyword();
+            else
+                GenerateRandomKeyword();
+        }
+        private void GenerateCustomKeyword()
         {
             Dictionary<int, string[]> poem = new Dictionary<int, string[]>();
             string[] wordArray;
@@ -156,7 +167,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
             SetKeyword();
         }
 
-        public void GenerateRandomKeyword()
+        private void GenerateRandomKeyword()
         {
             Random random = new Random();
             Dictionary<int, string[]> poem = new Dictionary<int, string[]>();
