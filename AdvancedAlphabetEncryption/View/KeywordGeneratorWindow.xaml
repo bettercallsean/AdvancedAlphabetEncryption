@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
         xmlns:converter="clr-namespace:AdvancedAlphabetEncryption.Utilities"
         mc:Ignorable="d"
-        Title="Keyword Generator" Height="300" Width="300">
+        Title="Keyword Generator" Height="400" Width="300">
 
     <Window.DataContext>
         <viewmodels:KeywordViewModel x:Name="KeywordViewModel"/>
@@ -18,10 +18,14 @@
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Window.Resources>
 
-    <StackPanel Background="White" HorizontalAlignment="Center">
-        <CheckBox Name="GenerateCustomKeyword" Content="Generate custom keyword" Margin="0, 20, 0, 0" IsChecked="{Binding GenerateCustomKeyword}" />
+    <StackPanel Background="White" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
+        <TextBlock Text="A new keyword needs to be generated; tick below if you wish to manually configure it. Otherwise, a random one will be generated for you" TextWrapping="Wrap" 
+                   Width="200" FontWeight="Bold"/>
+        <CheckBox Name="GenerateCustomKeyword" Content="Generate custom keyword" Margin="0, 30, 0, 0" IsChecked="{Binding GenerateCustomKeywordChecked}" />
         <TextBlock Text="Select a poem:" Margin="0, 10, 0, 0"/>
-        <ComboBox ItemsSource="{Binding Poems}" SelectedItem="{Binding PoemSelection}" IsSynchronizedWithCurrentItem="True" IsEnabled="{Binding ElementName=GenerateCustomKeyword, Path=IsChecked}"/>
+        <ComboBox ItemsSource="{Binding Poems}" SelectedValuePath="Value" DisplayMemberPath="Key"
+                  SelectedValue="{Binding PoemSelection}" IsEnabled="{Binding ElementName=GenerateCustomKeyword, Path=IsChecked}"/>
+
 
         <StackPanel Margin="0, 10, 0, 20">
             <TextBlock Text="Enter a line number: "/>
