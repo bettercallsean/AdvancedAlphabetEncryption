@@ -7,7 +7,7 @@
         xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
         xmlns:converter="clr-namespace:AdvancedAlphabetEncryption.Utilities"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="400">
+        Title="Login" Height="450" Width="400">
     
     <Window.DataContext>
         <viewmodel:LoginViewModel x:Name="LoginViewModel"/>
@@ -19,12 +19,12 @@
     </Window.Resources>
     
     <Grid>
-        <StackPanel Margin="20">
+        <StackPanel Margin="20" FocusManager.FocusedElement="{Binding ElementName=emailBox}">
             <Image Source="pack://application:,,,/Resources/Images/agent.png" Width="100"/>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="200">
                 <TextBlock Text="Login to your account" FontSize="18" Margin="0, 0, 0, 60" HorizontalAlignment="Center"/>
                 <TextBlock Text="Email"/>
-                <TextBox Text="{Binding Email, Mode=OneWayToSource}"  Margin="0, 0, 0, 10"/>
+                <TextBox Name="emailBox" Text="{Binding Email, Mode=OneWayToSource}"  Margin="0, 0, 0, 10"/>
                 <TextBlock Text="Password" />
                 <PasswordBox Name="passwordBox"  Margin="0, 0, 0, 20" />
                 <TextBlock Name="loginErrorTextBlock" Text="Check Email/Password and try again" 
