@@ -18,19 +18,18 @@
     </Window.Resources>
 
     <DockPanel Margin="20">
-        <TabControl Width="530" BorderThickness="1">
+        <TabControl Width="530" BorderThickness="1" Margin="0, 0, 10, 0">
             <TabItem Header="Encrypt/Decrypt" Content="{StaticResource EncryptDecryptView}"/>
             <TabItem Header="View Messages" Content="{StaticResource MessageDatabaseView}"/>
         </TabControl>
-        
-        <Border BorderBrush="Black" BorderThickness="0" Padding="2">
-            
+
+        <Border BorderThickness="1" BorderBrush="Black">
             <StackPanel>
                 <ContentControl Content="{StaticResource AgentDisplayView}"/>
                 <TextBlock Text="{Binding Path=KeywordString, StringFormat=Keyword: {0}}" />
             </StackPanel>
         </Border>
-        
+
     </DockPanel>
    
 </Window>
