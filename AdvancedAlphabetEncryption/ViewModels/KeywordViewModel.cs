@@ -16,7 +16,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
     {
         public KeywordViewModel()
         {
-            Poems = new List<string>() { "Poem 1", "Poem 2", "Poem 3" };
+            Poems = new ObservableCollection<string>() { "Poem 1", "Poem 2", "Poem 3" };
         }
 
         // Creates readonly string containing the contents of the POEMx.json file
@@ -64,7 +64,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
         #endregion
 
         // Used to fill the poem combobox
-        public List<string> Poems { get; set; }
+        public ObservableCollection<string> Poems { get; set; }
         private string _poemSelection;
         public string PoemSelection
         {
