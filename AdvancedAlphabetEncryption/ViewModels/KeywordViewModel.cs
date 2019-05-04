@@ -16,7 +16,12 @@ namespace AdvancedAlphabetEncryption.ViewModels
     {
         public KeywordViewModel()
         {
-            Poems = new ObservableCollection<string>() { "Poem 1", "Poem 2", "Poem 3" };
+            Poems = new Dictionary<string, int>()
+            {
+                {"Poem 1", 1},
+                {"Poem 2", 2},
+                {"Poem 3", 3}
+            };
         }
 
         // Creates readonly string containing the contents of the POEMx.json file
@@ -31,13 +36,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
         }
 
         #region ErrorValues
-        private bool _validKeyword = false;
-        public bool ValidKeyword
-        {
-            get => _validKeyword;
-            set { _validKeyword = value; OnPropertyChanged(); }
-        }
-
         private bool _validLine = true;
         public bool ValidLine
         {
@@ -63,19 +61,31 @@ namespace AdvancedAlphabetEncryption.ViewModels
         public DateTime KeywordDaySet { get; private set; }
         #endregion
 
-        public bool GenerateCustomKeywordChecked { get; set; } = false;
+
 
         #region CustomKeywordProperties
-        // Used to fill the poem combobox
-        public ObservableCollection<string> Poems { get; set; }
-        private string _poemSelection;
-        public string PoemSelection
+        private bool _generateCustomKeywordChecked = false;
+        public bool GenerateCustomKeywordChecked
+        {
+            get => _generateCustomKeywordChecked;
+            set { _generateCustomKeywordChecked = value; OnPropertyChanged(); }
+        }
+
+        private Dictionary<string, int> _poems;
+        public Dictionary<string, int> Poems
+        {
+            get => _poems;
+            set { _poems = value; OnPropertyChanged(); }
+        }
+
+        private int _poemSelection;
+        public int PoemSelection
         {
             get => _poemSelection;
             set
             {
-                _poemSelection = value.ToString();
-                OnPropertyChanged();
+                _poemSelection = value;
+                OnPropertyChanged("Poems");
             }
         }
 
@@ -112,6 +122,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
             else
                 GenerateRandomKeyword();
         }
+
         private void GenerateCustomKeyword()
         {
             Dictionary<int, string[]> poem = new Dictionary<int, string[]>();
@@ -119,17 +130,14 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
             switch (PoemSelection)
             {
-                case "Poem 1":
+                case 1:
                     poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM1);
-                    PoemSelection = "1";
                     break;
-                case "Poem 2":
+                case 2:
                     poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM2);
-                    PoemSelection = "2";
                     break;
-                case "Poem 3":
+                case 3:
                     poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM3);
-                    PoemSelection = "3";
                     break;
             }
 
@@ -153,7 +161,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
             // Adds '0' padding to the number. e.g. '8' will turn to '08' but '14' will stay as '14'
             // Will produce a code in the following format - XX.XX.XX
-            KeywordCode = string.Format("{0}.{1}.{2}", PoemSelection.PadLeft(2, '0'), LineSelection.ToString().PadLeft(2, '0'), WordSelection.ToString().PadLeft(2, '0'));
+            KeywordCode = string.Format("{0}.{1}.{2}", PoemSelection.ToString().PadLeft(2, '0'), LineSelection.ToString().PadLeft(2, '0'), WordSelection.ToString().PadLeft(2, '0'));
 
             // Accounting for the 0-based array indexing of the words (word 1 will be at index 0)
             WordSelection--;
@@ -161,7 +169,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
             wordArray = poem[LineSelection];
             KeywordString = wordArray[WordSelection];
             KeywordSetBy = App.agent.Initials;
-            ValidKeyword = true;
             KeywordDaySet = DateTime.Now;
 
             SetKeyword();
@@ -173,9 +180,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
             Dictionary<int, string[]> poem = new Dictionary<int, string[]>();
             string[] wordArray;
 
-            int poemSelection = random.Next(1, 3);
+            int PoemSelection = random.Next(1, 3);
 
-            switch (poemSelection)
+            switch (PoemSelection)
             {
                 case 1:
                     poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM1);
@@ -188,16 +195,21 @@ namespace AdvancedAlphabetEncryption.ViewModels
                     break;
             }
 
-            int lineSelection = random.Next(1, poem.Count);
+            LineSelection = random.Next(1, poem.Count);
 
-            wordArray = poem[lineSelection];
-            int wordSelection = random.Next(0, wordArray.Length);
+            wordArray = poem[LineSelection];
+            WordSelection = random.Next(0, wordArray.Length);
 
-            KeywordString = wordArray[wordSelection];
-            wordSelection++;
-            KeywordCode = string.Format("{0}.{1}.{2}", poemSelection.ToString().PadLeft(2, '0'), lineSelection.ToString().PadLeft(2, '0'), wordSelection.ToString().PadLeft(2, '0'));
+            KeywordString = wordArray[WordSelection];
+
+            // The word selection will be using a 0-based indexing system, so each value needs to be increased by 1 to reflect that counting starts at 1
+            // in the real world
+            WordSelection++;
+
+            // Adds '0' padding to the number. e.g. '8' will turn to '08' but '14' will stay as '14'
+            // Will produce a code in the following format - XX.XX.XX
+            KeywordCode = string.Format("{0}.{1}.{2}", PoemSelection.ToString().PadLeft(2, '0'), LineSelection.ToString().PadLeft(2, '0'), WordSelection.ToString().PadLeft(2, '0'));
             KeywordSetBy = App.agent.Initials;
-            ValidKeyword = true;
             KeywordDaySet = DateTime.Now;
 
             SetKeyword();
