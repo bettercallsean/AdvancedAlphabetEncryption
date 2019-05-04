@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
         xmlns:converter="clr-namespace:AdvancedAlphabetEncryption.Utilities"
         mc:Ignorable="d"
-        Title="KeywordGeneratorWindow" Height="300" Width="300">
+        Title="Keyword Generator" Height="300" Width="300">
 
     <Window.DataContext>
         <viewmodels:KeywordViewModel x:Name="KeywordViewModel"/>
