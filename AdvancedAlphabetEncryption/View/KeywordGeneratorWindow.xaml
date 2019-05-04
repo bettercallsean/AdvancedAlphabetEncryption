@@ -1,0 +1,38 @@
+﻿<Window x:Class="AdvancedAlphabetEncryption.View.KeywordGeneratorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdvancedAlphabetEncryption.View"
+        xmlns:viewmodels="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
+        xmlns:converter="clr-namespace:AdvancedAlphabetEncryption.Utilities"
+        mc:Ignorable="d"
+        Title="KeywordGeneratorWindow" Height="300" Width="300">
+
+    <Window.DataContext>
+        <viewmodels:KeywordViewModel x:Name="KeywordViewModel"/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <viewmodels:KeywordViewModel x:Key="KeywordViewModel"/>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+
+    <StackPanel Background="White" HorizontalAlignment="Center">
+        <TextBlock Text="Select a poem:" Margin="0, 10, 0, 0"/>
+        <ComboBox ItemsSource="{Binding Poems}" SelectedItem="{Binding PoemSelection}" IsSynchronizedWithCurrentItem="True" />
+
+        <StackPanel Margin="0, 10, 0, 30">
+            <TextBlock Text="Enter a line number: "/>
+            <TextBox Text="{Binding LineSelection}" />
+            <TextBlock Text="Invalid line number" Foreground="Red"  Visibility="{Binding ValidLine, Converter={StaticResource BoolToVisibilityConverter}}" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Enter a word number: " />
+            <TextBox Text="{Binding WordSelection}"/>
+            <TextBlock Text="Invalid word number" Foreground="Red" Visibility="{Binding ValidWord, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        </StackPanel>
+
+        <Button Content="Submit" Command="{Binding GenerateKeywordCommand}" Width="100"/>
+
+    </StackPanel>
+</Window>
