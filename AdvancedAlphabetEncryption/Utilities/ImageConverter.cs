@@ -14,7 +14,7 @@ namespace AdvancedAlphabetEncryption.Utilities
         public static byte[] ImageToByteArray(Image imageIn)
         {
             MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             return ms.ToArray();
         }
 
