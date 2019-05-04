@@ -8,15 +8,19 @@
         xmlns:converter="clr-namespace:AdvancedAlphabetEncryption.Utilities"
         mc:Ignorable="d"
         Title="LoginWindow" Height="450" Width="400">
+    
     <Window.DataContext>
         <viewmodel:LoginViewModel x:Name="LoginViewModel"/>
     </Window.DataContext>
+    
     <Window.Resources>
         <viewmodel:LoginViewModel x:Key="LoginViewModel"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Window.Resources>
+    
     <Grid>
         <StackPanel Margin="20">
+            <Image Source="pack://application:,,,/Resources/Images/agent.png" Width="100"/>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="200">
                 <TextBlock Text="Login to your account" FontSize="18" Margin="0, 0, 0, 60" HorizontalAlignment="Center"/>
                 <TextBlock Text="Email"/>
