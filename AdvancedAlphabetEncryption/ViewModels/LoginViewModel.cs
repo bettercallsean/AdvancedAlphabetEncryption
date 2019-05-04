@@ -1,4 +1,5 @@
 ﻿using AdvancedAlphabetEncryption.AlphabetEncryptionDbContext;
+using AdvancedAlphabetEncryption.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +21,11 @@ namespace AdvancedAlphabetEncryption.ViewModels
             set { _email = value; OnPropertyChanged(); }
         }
 
-        private bool _failedLogin = false;
-        public bool FailedLogin
+        private bool _successfulLogin = true;
+        public bool SuccessfulLogin
         {
-            get => _failedLogin;
-            set { _failedLogin = value; OnPropertyChanged(); }
+            get => _successfulLogin;
+            set { _successfulLogin = value; OnPropertyChanged(); }
         }
 
         public ICommand LoginCommand { get => new RelayCommand(o => Login(o)); }
@@ -39,21 +40,39 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
                 if (query != null && query.ValidPassword(passwordBox.Password))
                 {
-                    FailedLogin = false;
                     App.agent = query;
 
                     //I know that this isn't MVVM compliant, however it's used only once and people on StackOverflow etc. seem to agree that 
                     // it isn't worth the extra setup for just a simple onetime action.
-                    Application.Current.MainWindow = new MainWindow();
+                    if (KeywordHasBeenSet())
+                        Application.Current.MainWindow = new MainWindow();
+                    else
+                        Application.Current.MainWindow = new KeywordGeneratorWindow();
+
                     Application.Current.MainWindow.Show();
 
                     OnClosingRequest();
 
                 }
                 
-                FailedLogin = true;
+                SuccessfulLogin = false;
                 
+            }
+        }
 
+        private bool KeywordHasBeenSet()
+        {
+            // Retrieves the last Keyword stored in the datbase
+            using (var db = new AdvancedAlphabetEncryptionContext())
+            {
+                App.keyword = db.Keyword.OrderByDescending(p => p.DaySet).FirstOrDefault();
+
+                // If the query is not a null value and the date is still the same, then the same keyword
+                // is used
+                if (!(App.keyword is null) && App.keyword.DaySet.DayOfYear == DateTime.Now.DayOfYear)
+                    return true;
+
+                return false;
             }
         }
     }
