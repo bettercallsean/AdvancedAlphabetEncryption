@@ -13,13 +13,14 @@
     </UserControl.Resources>
     
     <StackPanel Background="White" DataContext="{Binding Source={StaticResource MessageDatabaseViewModel}}">
-        <Label Content="Messages" FontSize="18"/>
+        <TextBlock Text="Messages" FontSize="18"/>
+        
         <DataGrid SelectionUnit="Cell" AutoGenerateColumns="False" IsReadOnly="True" Height="200" CanUserAddRows="False" ItemsSource="{Binding Messages}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="290" Header="Message" Binding="{Binding MessageString}"/>
                 <DataGridTextColumn Header="Keyword" Binding="{Binding Keyword}"/>
                 <DataGridTextColumn Header="Author" Binding="{Binding CreatedBy}"/>
-                <DataGridTextColumn Header="Date Written" Binding="{Binding CreationDate, StringFormat=\{0:MM/dd/yyyy hh:mm tt\}}"/>
+                <DataGridTextColumn Header="Date Written" Binding="{Binding CreationDate, StringFormat=\{0:MM/dd/yyyy HH:mm\}}"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
