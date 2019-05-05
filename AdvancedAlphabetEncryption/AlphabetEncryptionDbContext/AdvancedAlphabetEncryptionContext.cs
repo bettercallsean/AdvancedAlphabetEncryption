@@ -13,6 +13,7 @@ namespace AdvancedAlphabetEncryption.AlphabetEncryptionDbContext
     {
         public DbSet<DecryptedMessage> DecryptedMessages { get; set; }
         public DbSet<EncryptedMessage> EncryptedMessages { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public DbSet<Keyword> Keyword { get; set; }
         public DbSet<Agent> Agent { get; set; }
         
