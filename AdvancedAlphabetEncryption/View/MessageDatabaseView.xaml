@@ -15,8 +15,14 @@
     </UserControl.Resources>
     
     <StackPanel Background="White" DataContext="{Binding Source={StaticResource MessageDatabaseViewModel}}" Margin="10">
-        <TextBlock Text="Messages" FontSize="18" Margin="0,0,0,10"/>
-        
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
+            <TextBlock Text="Messages" FontSize="18" Margin="0,0,10,0"/>
+            <Button Width="26" Height="26" Command="{Binding RefreshMessagesCommand}">
+                <StackPanel>
+                    <Image Source="pack://application:,,,/Resources/Images/refresh.png"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 5">
             <StackPanel>
                 <TextBlock Text="Messages"/>
@@ -57,9 +63,9 @@
         </DataGrid>
 
         <UniformGrid Columns="3">
-            <TextBlock Text="{Binding TotalMessages, StringFormat=Total messages: {0}}" />
+            <TextBlock Text="{Binding TotalMessages, StringFormat=Total messages: {0}}"/>
             <TextBlock Text="{Binding TotalEncryptedMessages, StringFormat=Total encrypted messages: {0}}"/>
-            <TextBlock Text="{Binding TotalDecryptedMessages, StringFormat=Total decryted messages: {0}}" />
+            <TextBlock Text="{Binding TotalDecryptedMessages, StringFormat=Total decrypted messages: {0}}"/>
         </UniformGrid>
     </StackPanel>
     

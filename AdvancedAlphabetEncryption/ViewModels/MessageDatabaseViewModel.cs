@@ -11,12 +11,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace AdvancedAlphabetEncryption.ViewModels
 {
     class MessageDatabaseViewModel : BaseViewModel
     {
-        AdvancedAlphabetEncryptionContext db = new AdvancedAlphabetEncryptionContext();
+        readonly AdvancedAlphabetEncryptionContext db = new AdvancedAlphabetEncryptionContext();
         public MessageDatabaseViewModel()
         {
             MessageViewList = new List<string>
@@ -207,7 +208,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         #endregion
 
-
+        public ICommand RefreshMessagesCommand { get => new RelayCommand(o => FilterMessages()); }
         private void FilterMessages()
         {
             // Forces the message filter to research through the available messages again after a property
@@ -256,6 +257,8 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
             ListMessages();
         }
+
+        
 
         private void ListMessages()
         {
