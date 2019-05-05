@@ -61,7 +61,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
             set { _validWord = value; OnPropertyChanged(); }
         }
 
-        private bool _validKeyword;
         public bool ValidKeyword
         {
             get
