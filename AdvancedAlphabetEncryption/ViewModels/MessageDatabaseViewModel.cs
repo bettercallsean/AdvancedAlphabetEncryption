@@ -33,6 +33,16 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 {"Filter by Agent", 2 },
                 {"Filter by Keyword and Date", 3}
             };
+
+            // Initialises the Messages observable collection with messages from the database
+            FilterMessages();
+        }
+
+        private int _totalMessages;
+        public int TotalMessages
+        {
+            get => _totalMessages;
+            set { _totalMessages = value; OnPropertyChanged(); }
         }
 
         private int _totalEncryptedMessages;
@@ -49,6 +59,16 @@ namespace AdvancedAlphabetEncryption.ViewModels
             set { _totalDecryptedMessages = value; OnPropertyChanged(); }
         }
 
+        // Holds the collection of messages to be displayed
+        private ObservableCollection<Message> _messages;
+        public ObservableCollection<Message> Messages
+        {
+            get => _messages;
+            set { _messages = value; OnPropertyChanged(); }
+        }
+
+
+        #region FilteringOptions
 
         // Used to allow the user to switch between encrypted and decrypted message views
         private List<string> _messageViewList;
@@ -82,6 +102,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 else
                     FilterByDateEnabled = false;
                 OnPropertyChanged();
+
                 FilterMessages();
             }
         }
@@ -95,7 +116,8 @@ namespace AdvancedAlphabetEncryption.ViewModels
             {
                 _selectedMessageView = value;
                 OnPropertyChanged();
-                ListMessages();
+
+                FilterMessages();
             }
 
         }
@@ -118,19 +140,18 @@ namespace AdvancedAlphabetEncryption.ViewModels
             {
                 _filterInput = value;
                 OnPropertyChanged();
+
                 FilterMessages();
             }
         }
 
-        // Holds the collection of messages to be displayed
-        private ObservableCollection<Message> _messages;
-        public ObservableCollection<Message> Messages
-        {
-            get => _messages;
-            set { _messages = value; OnPropertyChanged(); }
-        }
+        #endregion
+
+        
 
         #region DateFilters
+
+        // If enabled, the DatePickers menu will appear below the filtering options
         public bool _filterByDateEnabled = false;
         public bool FilterByDateEnabled
         {
@@ -138,6 +159,8 @@ namespace AdvancedAlphabetEncryption.ViewModels
             set { _filterByDateEnabled = value; OnPropertyChanged(); }
         }
 
+        // If enabled, the DatePicker for EndDate will appear in the UI,
+        // allowing the user to search through a date range
         private bool _searchRangeOfDatesEnabled = false;
         public bool SearchRangeOfDatesEnabled
         {
@@ -146,10 +169,13 @@ namespace AdvancedAlphabetEncryption.ViewModels
             {
                 _searchRangeOfDatesEnabled = value;
                 OnPropertyChanged();
+
                 FilterMessages();
             }
         }
 
+        // The default date to search, or the starting date if SearchRangeOfDatesEnabled
+        // is set to true
         private DateTime _startDate = DateTime.Now;
         public DateTime StartDate
         {
@@ -158,10 +184,14 @@ namespace AdvancedAlphabetEncryption.ViewModels
             {
                 _startDate = value;
                 OnPropertyChanged();
+
                 FilterMessages();
             }
         }
 
+        // If SearchRangeOfDatesEnabled is enabled, a DatePicker will appear that will allow
+        // the user to enter an end date which will be used when searching for messages written
+        // within a certain date range
         private DateTime _endDate = DateTime.Now;
         public DateTime EndDate
         {
@@ -170,44 +200,33 @@ namespace AdvancedAlphabetEncryption.ViewModels
             {
                 _endDate = value;
                 OnPropertyChanged();
+
                 FilterMessages();
             }
         }
+
         #endregion
 
-        public void ListMessages()
-        {
-
-            using (var db = new AdvancedAlphabetEncryptionContext())
-            {
-                switch (SelectedMessageView)
-                {
-                    case "Encrypted":
-                        Messages = new ObservableCollection<Message>(db.EncryptedMessages.OrderByDescending(m => m.CreationDate));
-                        break;
-                    case "Decrypted":
-                        Messages = new ObservableCollection<Message>(db.DecryptedMessages.OrderByDescending(m => m.CreationDate));
-                        break;
-                    default:
-                        Messages = new ObservableCollection<Message>(db.Messages.OrderByDescending(m => m.CreationDate));
-                        break;
-                }
-            }
-        }
 
         private void FilterMessages()
         {
+            // Forces the message filter to research through the available messages again after a property
+            // has been updated
+
             // If there is a value stored in FilterInput, then it can proceed to filter the results
-            if (SelectedFilterOption != 0)// && !string.IsNullOrWhiteSpace(FilterInput))
+            if (SelectedFilterOption != 0)
             {
                 switch (SelectedFilterOption)
                 {
+                    // Keyword filtering
                     case 1:
                         Messages = new ObservableCollection<Message>(db.Messages.Where(m => m.Keyword == FilterInput.ToLower()));
                         break;
+                    // Agent initials filtering
                     case 2:
                         Messages = new ObservableCollection<Message>(db.Messages.Where(a => a.CreatedBy == FilterInput.ToUpper()));
                         break;
+                    // Keyword and Date filtering
                     case 3:
                         if (StartDate != null)
                         {
@@ -227,12 +246,35 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 }
             }
             else
-            {
+                // If there's no filter applied, simple display all the messages
                 Messages = new ObservableCollection<Message>(db.Messages);
-            }
+            
 
+            TotalMessages = Messages.Count();
             TotalEncryptedMessages = Messages.Count(m => m is EncryptedMessage);
             TotalDecryptedMessages = Messages.Count(m => m is DecryptedMessage);
+
+            ListMessages();
+        }
+
+        private void ListMessages()
+        {
+            // Changes what messages are displayed on screen depending on what message view is selected
+            using (var db = new AdvancedAlphabetEncryptionContext())
+            {
+                switch (SelectedMessageView)
+                {
+                    case "Encrypted":
+                        Messages = new ObservableCollection<Message>(Messages.Where(m => m is EncryptedMessage).OrderByDescending(m => m.CreationDate));
+                        break;
+                    case "Decrypted":
+                        Messages = new ObservableCollection<Message>(Messages.Where(m => m is DecryptedMessage).OrderByDescending(m => m.CreationDate));
+                        break;
+                    default:
+                        Messages = new ObservableCollection<Message>(Messages.OrderByDescending(m => m.CreationDate));
+                        break;
+                }
+            }
         }
     }
 }
