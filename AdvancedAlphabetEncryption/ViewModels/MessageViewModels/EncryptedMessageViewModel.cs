@@ -66,6 +66,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
             using (var db = new AdvancedAlphabetEncryptionContext())
             {
                 db.EncryptedMessages.Add(_encryptedMessage);
+                db.Messages.Add(_encryptedMessage);
                 db.SaveChanges();
             }
         }

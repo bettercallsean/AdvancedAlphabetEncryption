@@ -94,6 +94,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
             using (var db = new AdvancedAlphabetEncryptionContext())
             {
                 db.DecryptedMessages.Add(_decryptedMessage);
+                db.Messages.Add(_decryptedMessage);
                 db.SaveChanges();
             }
         }
