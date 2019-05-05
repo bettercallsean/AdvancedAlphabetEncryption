@@ -6,21 +6,25 @@
              xmlns:local="clr-namespace:AdvancedAlphabetEncryption.View"
              xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="550">
+             d:DesignHeight="400" d:DesignWidth="520">
     
     <UserControl.Resources>
         <viewmodel:MessageDatabaseViewModel x:Key="MessageDatabaseViewModel"/>
     </UserControl.Resources>
     
-    <StackPanel Background="White" DataContext="{Binding Source={StaticResource MessageDatabaseViewModel}}">
-        <TextBlock Text="Messages" FontSize="18"/>
-        
-        <DataGrid SelectionUnit="Cell" AutoGenerateColumns="False" IsReadOnly="True" Height="200" CanUserAddRows="False" ItemsSource="{Binding Messages}">
+    <StackPanel Background="White" DataContext="{Binding Source={StaticResource MessageDatabaseViewModel}}" Margin="10">
+        <TextBlock Text="Messages" FontSize="18" Margin="0,0,0,10"/>
+        <StackPanel Orientation="Horizontal">
+            <ComboBox ItemsSource="{Binding MessageViewList}" SelectedIndex="0" SelectedItem="{Binding SelectedMessageView}" Width="100"/>
+            <ComboBox ItemsSource="{Binding FilterOptions}" SelectedIndex="0" SelectedItem="{Binding SelectedFilterOption}" Width="120"/>
+            <TextBox Text="{Binding FilterInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+        </StackPanel>
+        <DataGrid SelectionUnit="Cell" AutoGenerateColumns="False" IsReadOnly="True" Height="250" CanUserAddRows="False" ItemsSource="{Binding Messages}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="290" Header="Message" Binding="{Binding MessageString}"/>
+                <DataGridTextColumn Width="270" Header="Message" Binding="{Binding MessageString}"/>
                 <DataGridTextColumn Header="Keyword" Binding="{Binding Keyword}"/>
                 <DataGridTextColumn Header="Author" Binding="{Binding CreatedBy}"/>
-                <DataGridTextColumn Header="Date Written" Binding="{Binding CreationDate, StringFormat=\{0:MM/dd/yyyy HH:mm\}}"/>
+                <DataGridTextColumn Header="Date Written" Binding="{Binding CreationDate, StringFormat=\{0:dd/MM/yyyy HH:mm\}}"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
