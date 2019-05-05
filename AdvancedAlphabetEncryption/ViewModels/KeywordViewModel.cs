@@ -36,25 +36,41 @@ namespace AdvancedAlphabetEncryption.ViewModels
         }
 
         #region ErrorValues
-        private bool _validPoem = false;
+        private bool _validPoem;
         public bool ValidPoem
         {
             get => _validPoem;
-            set { _validPoem = value; OnPropertyChanged(); }
+            set
+            {
+                _validPoem = value;
+                OnPropertyChanged();
+            }
         }
 
-        private bool _validLine = false;
+        private bool _validLine;
         public bool ValidLine
         {
             get => _validLine;
             set { _validLine = value; OnPropertyChanged(); }
         }
 
-        private bool _validWord = true;
+        private bool _validWord;
         public bool ValidWord
         {
             get => _validWord;
             set { _validWord = value; OnPropertyChanged(); }
+        }
+
+        private bool _validKeyword;
+        public bool ValidKeyword
+        {
+            get
+            {
+                if (ValidPoem && ValidLine && ValidWord)
+                    return true;
+                else
+                    return false;
+            }
         }
         #endregion
 
@@ -115,7 +131,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 }
 
                 ValidPoem = true;
+                LineSelection = _lineSelection;
                 OnPropertyChanged();
+                
             }
         }
 
@@ -135,7 +153,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
                 _lineSelection = value;
                 ValidLine = true;
+                WordSelection = _wordSelection;
                 OnPropertyChanged();
+                
             }
         }
 
@@ -152,7 +172,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 }
 
                 _wordSelection = --value;
-                MessageBox.Show(_wordSelection.ToString());
                 ValidWord = true;
                 OnPropertyChanged();
             }
@@ -163,10 +182,13 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         public void GenerateKeyword()
         {
-            if (GenerateCustomKeywordChecked)
-                GenerateCustomKeyword();
-            else
+            // If a valid poem, line and word have been selected, then the keyword generation can commence
+            // Otherwise, the user will need to fix their input
+            if(!GenerateCustomKeywordChecked)
                 GenerateRandomKeyword();
+            else if (ValidKeyword && GenerateCustomKeywordChecked)
+                GenerateCustomKeyword();
+            
         }
 
         private void GenerateCustomKeyword()
