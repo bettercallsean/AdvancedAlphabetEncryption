@@ -214,7 +214,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
             // has been updated
 
             // If there is a value stored in FilterInput, then it can proceed to filter the results
-            if (SelectedFilterOption != 0)
+            if (SelectedFilterOption != 0 && !string.IsNullOrWhiteSpace(FilterInput))
             {
                 switch (SelectedFilterOption)
                 {
