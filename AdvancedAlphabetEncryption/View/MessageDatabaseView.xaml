@@ -7,7 +7,7 @@
              xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="570">
+             d:DesignHeight="320" d:DesignWidth="520">
     
     <UserControl.Resources>
         <viewmodel:MessageDatabaseViewModel x:Key="MessageDatabaseViewModel"/>
@@ -47,7 +47,7 @@
             </StackPanel>
         </StackPanel>
         
-        <DataGrid SelectionUnit="Cell" AutoGenerateColumns="False" IsReadOnly="True" Height="200" CanUserAddRows="False" ItemsSource="{Binding Messages}" Margin="0, 5">
+        <DataGrid SelectionUnit="Cell" AutoGenerateColumns="False" IsReadOnly="True" Height="190" CanUserAddRows="False" ItemsSource="{Binding Messages}" Margin="0, 5">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="270" Header="Message" Binding="{Binding MessageString}"/>
                 <DataGridTextColumn Header="Keyword" Binding="{Binding Keyword}"/>
