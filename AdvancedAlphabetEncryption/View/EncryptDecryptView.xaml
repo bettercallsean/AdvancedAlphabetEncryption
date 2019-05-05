@@ -18,7 +18,7 @@
         <!--Encrypt-->
         <StackPanel Margin="0, 0, 0, 20" DataContext="{Binding Source={StaticResource EncryptedMessageViewModel}}">
             <TextBlock>Encrypt</TextBlock>
-            <TextBox Text="{Binding Path=MessageString, Mode=TwoWay}" Height="100" Margin="0, 5"/>
+            <TextBox Text="{Binding Path=MessageString, Mode=TwoWay}" Height="100" Margin="0, 5" TextWrapping="WrapWithOverflow"/>
 
             <DockPanel HorizontalAlignment="Right" >
                 <Button Command="{Binding EncryptCommand}" Height="20" Width="80" Content="Encrypt" DockPanel.Dock="Right"/>
@@ -29,7 +29,7 @@
         <!--Decrypt-->
         <StackPanel DataContext="{Binding Source={StaticResource DecryptedMessageViewModel}}">
             <TextBlock>Decrypt</TextBlock>
-            <TextBox Text="{Binding Path=MessageString, Mode=TwoWay}" Height="100" Margin="0, 5"/>
+            <TextBox Text="{Binding Path=MessageString, Mode=TwoWay}" Height="100" Margin="0, 5" TextWrapping="WrapWithOverflow"/>
 
             <Grid>
                 <Grid.ColumnDefinitions>
