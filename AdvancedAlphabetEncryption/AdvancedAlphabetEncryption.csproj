@@ -215,6 +215,7 @@
     <Content Include="connection.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Images\refresh.png" />
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
