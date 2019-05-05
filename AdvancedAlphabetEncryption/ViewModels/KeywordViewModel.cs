@@ -212,7 +212,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
         private void GenerateRandomKeyword()
         {
             Random random = new Random();
-            Dictionary<int, string[]> poem = new Dictionary<int, string[]>();
             string[] wordArray;
 
             int PoemSelection = random.Next(1, 3);
@@ -220,19 +219,19 @@ namespace AdvancedAlphabetEncryption.ViewModels
             switch (PoemSelection)
             {
                 case 1:
-                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem1);
+                    Poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem1);
                     break;
                 case 2:
-                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem2);
+                    Poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem2);
                     break;
                 case 3:
-                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem3);
+                    Poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem3);
                     break;
             }
 
-            LineSelection = random.Next(1, poem.Count);
+            LineSelection = random.Next(1, Poem.Count);
 
-            wordArray = poem[LineSelection];
+            wordArray = Poem[LineSelection];
             WordSelection = random.Next(0, wordArray.Length);
 
             KeywordString = wordArray[WordSelection];
