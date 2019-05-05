@@ -16,7 +16,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
     {
         public KeywordViewModel()
         {
-            Poems = new Dictionary<string, int>()
+            PoemsDictionary = new Dictionary<string, int>()
             {
                 {"Poem 1", 1},
                 {"Poem 2", 2},
@@ -25,9 +25,9 @@ namespace AdvancedAlphabetEncryption.ViewModels
         }
 
         // Creates readonly string containing the contents of the POEMx.json file
-        readonly string POEM1 = Properties.Resources.POEM1;
-        readonly string POEM2 = Properties.Resources.POEM2;
-        readonly string POEM3 = Properties.Resources.POEM3;
+        readonly string Poem1 = Properties.Resources.POEM1;
+        readonly string Poem2 = Properties.Resources.POEM2;
+        readonly string Poem3 = Properties.Resources.POEM3;
 
         public Keyword Keyword
         {
@@ -36,7 +36,14 @@ namespace AdvancedAlphabetEncryption.ViewModels
         }
 
         #region ErrorValues
-        private bool _validLine = true;
+        private bool _validPoem = false;
+        public bool ValidPoem
+        {
+            get => _validPoem;
+            set { _validPoem = value; OnPropertyChanged(); }
+        }
+
+        private bool _validLine = false;
         public bool ValidLine
         {
             get => _validLine;
@@ -61,23 +68,28 @@ namespace AdvancedAlphabetEncryption.ViewModels
         public DateTime KeywordDaySet { get; private set; }
         #endregion
 
-
-
         #region CustomKeywordProperties
         private bool _generateCustomKeywordChecked = false;
         public bool GenerateCustomKeywordChecked
         {
             get => _generateCustomKeywordChecked;
-            set { _generateCustomKeywordChecked = value; OnPropertyChanged(); }
+            set
+            {
+                _generateCustomKeywordChecked = value;
+                OnPropertyChanged();
+            }
         }
 
-        private Dictionary<string, int> _poems;
-        public Dictionary<string, int> Poems
+        // Used to fill the ComboBox with a list of available poems
+        private Dictionary<string, int> _poemsDictionary;
+        public Dictionary<string, int> PoemsDictionary
         {
-            get => _poems;
-            set { _poems = value; OnPropertyChanged(); }
+            get => _poemsDictionary;
+            set { _poemsDictionary = value; OnPropertyChanged(); }
         }
 
+        // Takes the value from the PoemsDictionary (1, 2 or 3) and selects the poem based on that
+        public Dictionary<int, string[]> Poem { get; set; }
         private int _poemSelection;
         public int PoemSelection
         {
@@ -85,7 +97,25 @@ namespace AdvancedAlphabetEncryption.ViewModels
             set
             {
                 _poemSelection = value;
-                OnPropertyChanged("Poems");
+
+                switch (value)
+                {
+                    case 1:
+                        Poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem1);
+                        break;
+                    case 2:
+                        Poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem2);
+                        break;
+                    case 3:
+                        Poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem3);
+                        break;
+                    default:
+                        ValidPoem = false;
+                        return;
+                }
+
+                ValidPoem = true;
+                OnPropertyChanged();
             }
         }
 
@@ -95,8 +125,16 @@ namespace AdvancedAlphabetEncryption.ViewModels
             get => _lineSelection;
             set
             {
-                
+                // Performs checks to ensure that the numbers that have been passed through don't throw an IndexOutOfRange exception
+                // By setting ValidKeyword to false, it will allow a while loop to keep asking for input until these conditions are satisfied
+                if (value > Poem.Count || value < 1)
+                {
+                    ValidLine = false;
+                    return;
+                }
+
                 _lineSelection = value;
+                ValidLine = true;
                 OnPropertyChanged();
             }
         }
@@ -107,7 +145,15 @@ namespace AdvancedAlphabetEncryption.ViewModels
             get => _wordSelection;
             set
             {
-                _wordSelection = value;
+                if (value > Poem[LineSelection].Length || value < 1)
+                {
+                    ValidWord = false;
+                    return;
+                }
+
+                _wordSelection = --value;
+                MessageBox.Show(_wordSelection.ToString());
+                ValidWord = true;
                 OnPropertyChanged();
             }
         }
@@ -125,39 +171,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         private void GenerateCustomKeyword()
         {
-            Dictionary<int, string[]> poem = new Dictionary<int, string[]>();
             string[] wordArray;
-
-            switch (PoemSelection)
-            {
-                case 1:
-                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM1);
-                    break;
-                case 2:
-                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM2);
-                    break;
-                case 3:
-                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM3);
-                    break;
-            }
-
-            // Performs checks to ensure that the numbers that have been passed through don't throw an IndexOutOfRange exception
-            // By setting ValidKeyword to false, it will allow a while loop to keep asking for input until these conditions are satisfied
-            if (LineSelection > poem.Count || LineSelection < 1)
-            {
-                ValidLine = false;
-                return;
-            }
-
-            ValidLine = true;
-
-            if (WordSelection > poem[LineSelection].Length || WordSelection < 1)
-            {
-                ValidWord = false;
-                return;
-            }
-
-            ValidWord = true;
 
             // Adds '0' padding to the number. e.g. '8' will turn to '08' but '14' will stay as '14'
             // Will produce a code in the following format - XX.XX.XX
@@ -166,7 +180,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
             // Accounting for the 0-based array indexing of the words (word 1 will be at index 0)
             WordSelection--;
 
-            wordArray = poem[LineSelection];
+            wordArray = Poem[LineSelection];
             KeywordString = wordArray[WordSelection];
             KeywordSetBy = App.agent.Initials;
             KeywordDaySet = DateTime.Now;
@@ -185,13 +199,13 @@ namespace AdvancedAlphabetEncryption.ViewModels
             switch (PoemSelection)
             {
                 case 1:
-                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM1);
+                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem1);
                     break;
                 case 2:
-                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM2);
+                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem2);
                     break;
                 case 3:
-                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(POEM3);
+                    poem = JsonConvert.DeserializeObject<Dictionary<int, string[]>>(Poem3);
                     break;
             }
 

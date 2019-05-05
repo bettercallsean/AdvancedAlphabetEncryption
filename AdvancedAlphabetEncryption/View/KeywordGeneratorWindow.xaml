@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
         xmlns:converter="clr-namespace:AdvancedAlphabetEncryption.Utilities"
         mc:Ignorable="d"
-        Title="Keyword Generator" Height="400" Width="300">
+        Title="Keyword Generator" Height="450" Width="300">
 
     <Window.DataContext>
         <viewmodels:KeywordViewModel x:Name="KeywordViewModel"/>
@@ -21,19 +21,19 @@
     <StackPanel Background="White" HorizontalAlignment="Center" Margin="0, 20, 0, 0">
         <TextBlock Text="A new keyword needs to be generated; tick below if you wish to manually configure it. Otherwise, a random one will be generated for you" TextWrapping="Wrap" 
                    Width="200" FontWeight="Bold"/>
-        <CheckBox Name="GenerateCustomKeyword" Content="Generate custom keyword" Margin="0, 30, 0, 0" IsChecked="{Binding GenerateCustomKeywordChecked}" />
+        <CheckBox Name="generateCustomKeyword" Content="Generate custom keyword" Margin="0, 30, 0, 0" IsChecked="{Binding GenerateCustomKeywordChecked}" />
         <TextBlock Text="Select a poem:" Margin="0, 10, 0, 0"/>
-        <ComboBox ItemsSource="{Binding Poems}" SelectedValuePath="Value" DisplayMemberPath="Key"
-                  SelectedValue="{Binding PoemSelection}" IsEnabled="{Binding ElementName=GenerateCustomKeyword, Path=IsChecked}"/>
-
+        <ComboBox ItemsSource="{Binding PoemsDictionary}" SelectedValuePath="Value" DisplayMemberPath="Key"
+                  SelectedValue="{Binding PoemSelection}" IsEnabled="{Binding ElementName=generateCustomKeyword, Path=IsChecked}"/>
+        <TextBlock Text="Please select a poem" Foreground="Red"  Visibility="{Binding ValidPoem, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
         <StackPanel Margin="0, 10, 0, 20">
             <TextBlock Text="Enter a line number: "/>
-            <TextBox Text="{Binding LineSelection}" IsEnabled="{Binding ElementName=GenerateCustomKeyword, Path=IsChecked}" />
+            <TextBox Text="{Binding LineSelection, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding ValidPoem}" />
             <TextBlock Text="Invalid line number" Foreground="Red"  Visibility="{Binding ValidLine, Converter={StaticResource BoolToVisibilityConverter}}" Margin="0,0,0,10"/>
 
             <TextBlock Text="Enter a word number: " />
-            <TextBox Text="{Binding WordSelection}" IsEnabled="{Binding ElementName=GenerateCustomKeyword, Path=IsChecked}"/>
+            <TextBox Text="{Binding WordSelection, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding ValidLine}"/>
             <TextBlock Text="Invalid word number" Foreground="Red" Visibility="{Binding ValidWord, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </StackPanel>
         <Button Content="Submit" Command="{Binding GenerateKeywordCommand}" Width="100"/>
