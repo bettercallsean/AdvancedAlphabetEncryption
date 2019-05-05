@@ -11,6 +11,7 @@
 *.sln.docstates
 AdvancedAlphabetEncryption/Utilities/PoemWriter.cs
 AdvancedAlphabetEncryption/Migrations
+AdvancedAlphabetEncryption/connection.config
 TestApp
 
 # User-specific files (MonoDevelop/Xamarin Studio)
