@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +26,12 @@ namespace AdvancedAlphabetEncryption.ViewModels
                 "Decrypted"
             };
 
-            FilterOptions = new List<string>
+            FilterOptions = new Dictionary<string, int>
             {
-                "No Filter",
-                "Filter by Keyword",
-                "Filter by Agent"
+                {"No Filter", 0},
+                {"Filter by Keyword", 1 },
+                {"Filter by Agent", 2 },
+                {"Filter by Keyword and Date", 3}
             };
         }
 
@@ -57,26 +59,30 @@ namespace AdvancedAlphabetEncryption.ViewModels
         }
 
         // Lists the available filters for the messages
-        private List<string> _filterOptions;
-        public List<string> FilterOptions
+        private Dictionary<string, int> _filterOptions;
+        public Dictionary<string, int> FilterOptions
         {
             get => _filterOptions;
             set { _filterOptions = value; OnPropertyChanged(); }
         }
 
         // Used to determine what filtering option is selected
-        private string _selectedFilterOption;
-        public string SelectedFilterOption
+        private int _selectedFilterOption;
+        public int SelectedFilterOption
         {
             get { return _selectedFilterOption; }
             set
             {
                 _selectedFilterOption = value;
+
+                // If this option is selected, the DatePickers will appear to allow
+                // the user to enter their search dates
+                if (value == 3)
+                    FilterByDateEnabled = true;
+                else
+                    FilterByDateEnabled = false;
                 OnPropertyChanged();
                 FilterMessages();
-
-                // Clears the textbox ready for the new filter
-                //FilterInput = "";
             }
         }
 
@@ -116,17 +122,58 @@ namespace AdvancedAlphabetEncryption.ViewModels
             }
         }
 
+        // Holds the collection of messages to be displayed
         private ObservableCollection<Message> _messages;
         public ObservableCollection<Message> Messages
         {
             get => _messages;
+            set { _messages = value; OnPropertyChanged(); }
+        }
 
+        #region DateFilters
+        public bool _filterByDateEnabled = false;
+        public bool FilterByDateEnabled
+        {
+            get => _filterByDateEnabled;
+            set { _filterByDateEnabled = value; OnPropertyChanged(); }
+        }
+
+        private bool _searchRangeOfDatesEnabled = false;
+        public bool SearchRangeOfDatesEnabled
+        {
+            get => _searchRangeOfDatesEnabled; 
             set
             {
-                _messages = value;
+                _searchRangeOfDatesEnabled = value;
                 OnPropertyChanged();
+                FilterMessages();
             }
         }
+
+        private DateTime _startDate = DateTime.Now;
+        public DateTime StartDate
+        {
+            get => _startDate;
+            set
+            {
+                _startDate = value;
+                OnPropertyChanged();
+                FilterMessages();
+            }
+        }
+
+        private DateTime _endDate = DateTime.Now;
+        public DateTime EndDate
+        {
+            get => _endDate;
+            set
+            {
+                _endDate = value;
+                OnPropertyChanged();
+                FilterMessages();
+            }
+        }
+        #endregion
 
         public void ListMessages()
         {
@@ -151,15 +198,31 @@ namespace AdvancedAlphabetEncryption.ViewModels
         private void FilterMessages()
         {
             // If there is a value stored in FilterInput, then it can proceed to filter the results
-            if (SelectedFilterOption != "No Filter" && !string.IsNullOrWhiteSpace(FilterInput))
+            if (SelectedFilterOption != 0)// && !string.IsNullOrWhiteSpace(FilterInput))
             {
                 switch (SelectedFilterOption)
                 {
-                    case "Filter by Keyword":
+                    case 1:
                         Messages = new ObservableCollection<Message>(db.Messages.Where(m => m.Keyword == FilterInput.ToLower()));
                         break;
-                    case "Filter by Agent":
+                    case 2:
                         Messages = new ObservableCollection<Message>(db.Messages.Where(a => a.CreatedBy == FilterInput.ToUpper()));
+                        break;
+                    case 3:
+                        if (StartDate != null)
+                        {
+                            // If the user wants to seaarh through a range of dates
+                            // and EndDate is set to a later date than the start date, search can commence
+                            if (SearchRangeOfDatesEnabled && EndDate > StartDate)
+                                Messages = new ObservableCollection<Message>(db.Messages.Where(d => DbFunctions.TruncateTime(d.CreationDate) >= StartDate 
+                                && DbFunctions.TruncateTime(d.CreationDate) <= EndDate 
+                                && d.Keyword == FilterInput));
+
+                            // Else if EndDate is less than StartDate or if it simply hasn't been set
+                            else
+                                Messages = new ObservableCollection<Message>(db.Messages.Where(d => DbFunctions.TruncateTime(d.CreationDate) == StartDate 
+                                && d.Keyword == FilterInput));
+                        }
                         break;
                 }
             }

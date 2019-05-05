@@ -5,21 +5,49 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AdvancedAlphabetEncryption.View"
              xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="520">
+             d:DesignHeight="400" d:DesignWidth="570">
     
     <UserControl.Resources>
         <viewmodel:MessageDatabaseViewModel x:Key="MessageDatabaseViewModel"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
     
     <StackPanel Background="White" DataContext="{Binding Source={StaticResource MessageDatabaseViewModel}}" Margin="10">
         <TextBlock Text="Messages" FontSize="18" Margin="0,0,0,10"/>
-        <StackPanel Orientation="Horizontal">
-            <ComboBox ItemsSource="{Binding MessageViewList}" SelectedIndex="0" SelectedItem="{Binding SelectedMessageView}" Width="100"/>
-            <ComboBox ItemsSource="{Binding FilterOptions}" SelectedIndex="0" SelectedItem="{Binding SelectedFilterOption}" Width="120"/>
-            <TextBox Text="{Binding FilterInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+        
+        <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 5">
+            <StackPanel>
+                <TextBlock Text="Messages"/>
+                <ComboBox ItemsSource="{Binding MessageViewList}" SelectedIndex="0" SelectedItem="{Binding SelectedMessageView}" Width="100" Margin="0, 0, 5, 0"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Filters"/>
+                <ComboBox ItemsSource="{Binding FilterOptions}" SelectedValuePath="Value" DisplayMemberPath="Key" SelectedIndex="0" 
+                          SelectedValue="{Binding SelectedFilterOption}" Width="120" Margin="0, 0, 5, 0"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Filter Input" Margin="0,0,0,2"/>
+                <TextBox Text="{Binding FilterInput, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="0, 0, 5, 0" />
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom">
+                <CheckBox Content="Search range of dates?" IsChecked="{Binding SearchRangeOfDatesEnabled}" Margin="0, 0, 0, 4" 
+                          Visibility="{Binding FilterByDateEnabled, Converter={StaticResource BoolToVisibilityConverter}}" />
+            </StackPanel>
+            
         </StackPanel>
-        <DataGrid SelectionUnit="Cell" AutoGenerateColumns="False" IsReadOnly="True" Height="250" CanUserAddRows="False" ItemsSource="{Binding Messages}">
+
+        <StackPanel Orientation="Horizontal" Visibility="{Binding FilterByDateEnabled, Converter={StaticResource BoolToVisibilityConverter}}" Margin="0, 0, 0, 5">
+            <TextBlock Text="Start date: " VerticalAlignment="Center"/>
+            <DatePicker SelectedDate="{Binding Path=StartDate, Mode=TwoWay,TargetNullValue={x:Static sys:DateTime.Now}}" Margin="10,0,20,0"/>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding SearchRangeOfDatesEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text="(Optional) End date: " VerticalAlignment="Center"/>
+                <DatePicker SelectedDate="{Binding Path=EndDate, Mode=TwoWay,TargetNullValue={x:Static sys:DateTime.Now}}" Margin="10,0"/>
+            </StackPanel>
+        </StackPanel>
+        
+        <DataGrid SelectionUnit="Cell" AutoGenerateColumns="False" IsReadOnly="True" Height="240" CanUserAddRows="False" ItemsSource="{Binding Messages}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="270" Header="Message" Binding="{Binding MessageString}"/>
                 <DataGridTextColumn Header="Keyword" Binding="{Binding Keyword}"/>
