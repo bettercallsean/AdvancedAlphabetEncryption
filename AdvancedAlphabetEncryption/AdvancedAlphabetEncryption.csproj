@@ -102,6 +102,10 @@
     <Compile Include="Migrations\201905041352171_SlimKeywordModel.Designer.cs">
       <DependentUpon>201905041352171_SlimKeywordModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905051500141_AddMessages.cs" />
+    <Compile Include="Migrations\201905051500141_AddMessages.Designer.cs">
+      <DependentUpon>201905051500141_AddMessages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\ImageConverter.cs" />
     <Compile Include="ViewModels\AgentViewModel.cs" />
@@ -259,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905041352171_SlimKeywordModel.resx">
       <DependentUpon>201905041352171_SlimKeywordModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905051500141_AddMessages.resx">
+      <DependentUpon>201905051500141_AddMessages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
