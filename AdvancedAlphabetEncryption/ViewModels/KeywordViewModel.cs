@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -63,13 +64,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         public bool ValidKeyword
         {
-            get
-            {
-                if (ValidPoem && ValidLine && ValidWord)
-                    return true;
-                else
-                    return false;
-            }
+            get => ValidPoem && ValidLine && ValidWord;
         }
         #endregion
 
