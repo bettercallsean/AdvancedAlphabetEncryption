@@ -13,13 +13,13 @@
         <viewmodel:KeywordViewModel x:Key="KeywordViewModel"/>
     </UserControl.Resources>
 
-    <StackPanel  Background="White" HorizontalAlignment="Center">
-        <Label Content="Welcome" HorizontalAlignment="Center" FontSize="22" Margin="0, 20, 0, 10"/>
+    <StackPanel  Background="White">
+        <Label Content="Welcome" HorizontalAlignment="Center" FontSize="22" Margin="0, 20, 0, 0"/>
         
-        <StackPanel DataContext="{Binding Source={StaticResource AgentViewModel}}" Margin="0, 0, 0, 40" >
+        <StackPanel DataContext="{Binding Source={StaticResource AgentViewModel}}" Margin="0, 0, 0, 50" >
             
             <Border BorderThickness="4" BorderBrush="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 20">
-                <Image Source="{Binding ProfilePicture}" Width="120" Height="120"/>
+                <Image Source="{Binding ProfilePicture}" Width="100" Height="100"/>
             </Border>
             <StackPanel HorizontalAlignment="Center">
                 <TextBlock Text="{Binding FullName, StringFormat=Agent: {0}}"/>
