@@ -69,7 +69,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
                 // If the query is not a null value and the date is still the same, then the same keyword
                 // is used
-                if (!(App.keyword is null) && App.keyword.DaySet.DayOfYear == DateTime.Now.DayOfYear)
+                if (!(App.keyword is null) && App.keyword.DaySet.Date == DateTime.Now.Date)
                     return true;
 
                 return false;
