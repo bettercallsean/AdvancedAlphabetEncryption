@@ -36,6 +36,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
             set => App.keyword = value;
         }
 
+        // If an invalid value is enetered, these are set to false, causing an error to appear in the interface
         #region ErrorValues
         private bool _validPoem;
         public bool ValidPoem
@@ -68,6 +69,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
         }
         #endregion
 
+        // These are required to create a Keyword object. Everything here is stored in the database.
         #region KeywordProperties
         public string KeywordCode { get; private set; }
 
@@ -204,6 +206,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
             SetKeyword();
         }
 
+        // If the user doesn't wish the generate a keyword, this will do it for them. 
         private void GenerateRandomKeyword()
         {
             Random random = new Random();
@@ -244,6 +247,7 @@ namespace AdvancedAlphabetEncryption.ViewModels
             SetKeyword();
         }
 
+        // Sets the static App.keyword with the values entered here 
         private void SetKeyword()
         {
             using (var db = new AdvancedAlphabetEncryptionContext())

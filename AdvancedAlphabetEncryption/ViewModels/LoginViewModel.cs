@@ -1,7 +1,9 @@
 ﻿using AdvancedAlphabetEncryption.AlphabetEncryptionDbContext;
+using AdvancedAlphabetEncryption.Models;
 using AdvancedAlphabetEncryption.View;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
 {
     public class LoginViewModel : CloseableViewModel
     {
-
         private string _email;
         public string Email
         {
@@ -35,13 +36,12 @@ namespace AdvancedAlphabetEncryption.ViewModels
             var passwordBox = parameter as PasswordBox;
             using (var db = new AdvancedAlphabetEncryptionContext())
             {
-                var query = db.Agent.Where(a => a.Email == Email).FirstOrDefault();
-
+                Agent query = db.Agent.Where(a => a.Email == Email).FirstOrDefault();
 
                 if (query != null && query.ValidPassword(passwordBox.Password))
                 {
                     App.agent = query;
-
+                    SuccessfulLogin = true;
                     //I know that this isn't MVVM compliant, however it's used only once and people on StackOverflow etc. seem to agree that 
                     // it isn't worth the extra setup for just a simple onetime action.
                     if (KeywordHasBeenSet())
