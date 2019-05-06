@@ -89,22 +89,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AlphabetEncryptionDbContext\AdvancedAlphabetEncryptionContext.cs" />
-    <Compile Include="Migrations\201905021208336_AddProfilePicture.cs" />
-    <Compile Include="Migrations\201905021208336_AddProfilePicture.Designer.cs">
-      <DependentUpon>201905021208336_AddProfilePicture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905031903001_AddValidVerifiersToKeyword.cs" />
-    <Compile Include="Migrations\201905031903001_AddValidVerifiersToKeyword.Designer.cs">
-      <DependentUpon>201905031903001_AddValidVerifiersToKeyword.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905041352171_SlimKeywordModel.cs" />
-    <Compile Include="Migrations\201905041352171_SlimKeywordModel.Designer.cs">
-      <DependentUpon>201905041352171_SlimKeywordModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905051500141_AddMessages.cs" />
-    <Compile Include="Migrations\201905051500141_AddMessages.Designer.cs">
-      <DependentUpon>201905051500141_AddMessages.cs</DependentUpon>
-    </Compile>
     <Compile Include="Utilities\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\ImageConverter.cs" />
     <Compile Include="ViewModels\AgentViewModel.cs" />
@@ -122,31 +106,6 @@
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904291801347_InitialMigration.cs" />
-    <Compile Include="Migrations\201904291801347_InitialMigration.Designer.cs">
-      <DependentUpon>201904291801347_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904301256084_AddSetByToKeyword.cs" />
-    <Compile Include="Migrations\201904301256084_AddSetByToKeyword.Designer.cs">
-      <DependentUpon>201904301256084_AddSetByToKeyword.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904301857442_AddAgentTable.cs" />
-    <Compile Include="Migrations\201904301857442_AddAgentTable.Designer.cs">
-      <DependentUpon>201904301857442_AddAgentTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904301910504_AddPasswordProperty.cs" />
-    <Compile Include="Migrations\201904301910504_AddPasswordProperty.Designer.cs">
-      <DependentUpon>201904301910504_AddPasswordProperty.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904302015056_EncryptAgentPassword.cs" />
-    <Compile Include="Migrations\201904302015056_EncryptAgentPassword.Designer.cs">
-      <DependentUpon>201904302015056_EncryptAgentPassword.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904302053540_EncryptAgentPasswordPart2.cs" />
-    <Compile Include="Migrations\201904302053540_EncryptAgentPasswordPart2.Designer.cs">
-      <DependentUpon>201904302053540_EncryptAgentPasswordPart2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Utilities\Hashing.cs" />
     <Compile Include="ViewModels\MessageViewModels\DecryptedMessageViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModels\EncryptedMessageViewModel.cs" />
@@ -241,36 +200,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904291801347_InitialMigration.resx">
-      <DependentUpon>201904291801347_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904301256084_AddSetByToKeyword.resx">
-      <DependentUpon>201904301256084_AddSetByToKeyword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904301857442_AddAgentTable.resx">
-      <DependentUpon>201904301857442_AddAgentTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904301910504_AddPasswordProperty.resx">
-      <DependentUpon>201904301910504_AddPasswordProperty.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904302015056_EncryptAgentPassword.resx">
-      <DependentUpon>201904302015056_EncryptAgentPassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904302053540_EncryptAgentPasswordPart2.resx">
-      <DependentUpon>201904302053540_EncryptAgentPasswordPart2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905021208336_AddProfilePicture.resx">
-      <DependentUpon>201905021208336_AddProfilePicture.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905031903001_AddValidVerifiersToKeyword.resx">
-      <DependentUpon>201905031903001_AddValidVerifiersToKeyword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905041352171_SlimKeywordModel.resx">
-      <DependentUpon>201905041352171_SlimKeywordModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905051500141_AddMessages.resx">
-      <DependentUpon>201905051500141_AddMessages.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
