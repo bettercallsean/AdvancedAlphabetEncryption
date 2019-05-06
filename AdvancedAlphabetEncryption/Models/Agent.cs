@@ -39,34 +39,26 @@ namespace AdvancedAlphabetEncryption.Models
         {
             get => _firstName;
 
-            set
-            {
-                if (!string.IsNullOrWhiteSpace(value))
-                    _firstName = value;
-            }
+            set => _firstName = value;
+            
         }
 
         public string LastName
         {
             get => _lastName;
 
-            set
-            {
-                if (!string.IsNullOrWhiteSpace(value))
-                    _lastName = value;
-            }
+            set => _lastName = value;
+            
         }
 
         public string Initials
         {
             get
             {
-
                     _initials[0] = char.ToUpper(_firstName[0]);
                     _initials[1] = char.ToUpper(_lastName[0]);
 
                     return new string(_initials);
-            
             }
         }
 
@@ -81,12 +73,12 @@ namespace AdvancedAlphabetEncryption.Models
                     MailAddress mail = new MailAddress(value);
                     _email = mail.Address;
                 }
-                catch (FormatException) { Console.WriteLine("Invalid Email Format!"); }
-                catch (ArgumentException) { Console.WriteLine("Please check your input and try again."); }
-
+                catch (FormatException) { throw new FormatException("Invalid Email Format!"); }
+                catch (ArgumentException) { throw new ArgumentException("Please check your input and try again."); }
             }
         }
 
+        // Stores the picture as a byte array to make it easier to store in a database
         public byte[] ProfilePicture { get; set; }
 
         public virtual string PasswordStored
