@@ -17,7 +17,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
 {
     class MessageDatabaseViewModel : BaseViewModel
     {
-        readonly AdvancedAlphabetEncryptionContext db = new AdvancedAlphabetEncryptionContext();
         public MessageDatabaseViewModel()
         {
             MessageViewList = new List<string>
@@ -148,7 +147,6 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
         #endregion
 
-        
 
         #region DateFilters
 
@@ -209,46 +207,50 @@ namespace AdvancedAlphabetEncryption.ViewModels
         #endregion
 
         public ICommand RefreshMessagesCommand { get => new RelayCommand(o => FilterMessages()); }
+
         private void FilterMessages()
         {
             // Forces the message filter to research through the available messages again after a property
             // has been updated
 
-            // If there is a value stored in FilterInput, then it can proceed to filter the results
-            if (SelectedFilterOption != 0 && !string.IsNullOrWhiteSpace(FilterInput))
+            using (var db = new AdvancedAlphabetEncryptionContext())
             {
-                switch (SelectedFilterOption)
+                // If there is a value stored in FilterInput, then it can proceed to filter the results
+                if (SelectedFilterOption != 0 && !string.IsNullOrWhiteSpace(FilterInput))
                 {
-                    // Keyword filtering
-                    case 1:
-                        Messages = new ObservableCollection<Message>(db.Messages.Where(m => m.Keyword == FilterInput.ToLower()));
-                        break;
-                    // Agent initials filtering
-                    case 2:
-                        Messages = new ObservableCollection<Message>(db.Messages.Where(a => a.CreatedBy == FilterInput.ToUpper()));
-                        break;
-                    // Keyword and Date filtering
-                    case 3:
-                        if (StartDate != null)
-                        {
-                            // If the user wants to seaarh through a range of dates
-                            // and EndDate is set to a later date than the start date, search can commence
-                            if (SearchRangeOfDatesEnabled && EndDate > StartDate)
-                                Messages = new ObservableCollection<Message>(db.Messages.Where(d => DbFunctions.TruncateTime(d.CreationDate) >= StartDate 
-                                && DbFunctions.TruncateTime(d.CreationDate) <= EndDate 
-                                && d.Keyword == FilterInput));
+                    switch (SelectedFilterOption)
+                    {
+                        // Keyword filtering
+                        case 1:
+                            Messages = new ObservableCollection<Message>(db.Messages.Where(m => m.Keyword == FilterInput.ToLower()));
+                            break;
+                        // Agent initials filtering
+                        case 2:
+                            Messages = new ObservableCollection<Message>(db.Messages.Where(a => a.CreatedBy == FilterInput.ToUpper()));
+                            break;
+                        // Keyword and Date filtering
+                        case 3:
+                            if (StartDate != null)
+                            {
+                                // If the user wants to seaarh through a range of dates
+                                // and EndDate is set to a later date than the start date, search can commence
+                                if (SearchRangeOfDatesEnabled && EndDate > StartDate)
+                                    Messages = new ObservableCollection<Message>(db.Messages.Where(d => DbFunctions.TruncateTime(d.CreationDate) >= StartDate
+                                    && DbFunctions.TruncateTime(d.CreationDate) <= EndDate
+                                    && d.Keyword == FilterInput));
 
-                            // Else if EndDate is less than StartDate or if it simply hasn't been set
-                            else
-                                Messages = new ObservableCollection<Message>(db.Messages.Where(d => DbFunctions.TruncateTime(d.CreationDate) == StartDate 
-                                && d.Keyword == FilterInput));
-                        }
-                        break;
+                                // Else if EndDate is less than StartDate or if it simply hasn't been set
+                                else
+                                    Messages = new ObservableCollection<Message>(db.Messages.Where(d => DbFunctions.TruncateTime(d.CreationDate) == StartDate
+                                    && d.Keyword == FilterInput));
+                            }
+                            break;
+                    }
                 }
+                else
+                    // If there's no filter applied, simple display all the messages
+                    Messages = new ObservableCollection<Message>(db.Messages);
             }
-            else
-                // If there's no filter applied, simple display all the messages
-                Messages = new ObservableCollection<Message>(db.Messages);
             
 
             TotalMessages = Messages.Count();
