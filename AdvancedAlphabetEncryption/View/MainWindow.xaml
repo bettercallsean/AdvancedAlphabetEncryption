@@ -20,7 +20,7 @@
     <Grid Background="#303030">
         <DockPanel Margin="20">
             <TabControl Width="530" BorderThickness="1" Margin="0, 0, 10, 0">
-                <TabItem Header="Encrypt/Decrypt" Content="{StaticResource EncryptDecryptView}"/>
+                <TabItem Header="Encrypt/Decrypt Messages" Content="{StaticResource EncryptDecryptView}"/>
                 <TabItem Header="View Messages" Content="{StaticResource MessageDatabaseView}"/>
             </TabControl>
 
