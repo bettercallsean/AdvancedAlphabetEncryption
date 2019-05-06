@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace AdvancedAlphabetEncryption.Models
 {
-    class AlphabetGenerator
+    public class AlphabetGenerator
     {
-        Dictionary<int, char> intToCharDictionary;
-        Dictionary<char, int> charToIntDictionary;
+        public Dictionary<int, char> intToCharDictionary;
+        public Dictionary<char, int> charToIntDictionary;
 
-        protected internal AlphabetGenerator(string keyword)
+        public AlphabetGenerator(string keyword)
         {
             char[] keywordChars = keyword.ToCharArray();
             Matrix = new char[26, keyword.Length];
@@ -48,6 +48,7 @@ namespace AdvancedAlphabetEncryption.Models
 
         public char[,] Matrix { get; private set; }
 
+        // Used during debugging
         public void AlphabetPrinter()
         {
             for(int j = 0; j < Matrix.GetLength(1); j++)
@@ -59,6 +60,7 @@ namespace AdvancedAlphabetEncryption.Models
             }
         }
 
+        // Used to create the CharacterToInt and IntToCharacter, not used elsewhere unless called
         private void AlphabetSerializer()
         {
             intToCharDictionary = new Dictionary<int, char>();
