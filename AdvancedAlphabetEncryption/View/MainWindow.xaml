@@ -7,7 +7,7 @@
         xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
         xmlns:view="clr-namespace:AdvancedAlphabetEncryption.View"
         mc:Ignorable="d"
-        Title="Advanced Alphabet Encryption" Height="450" Width="800">
+        Title="Advanced Alphabet Encryption Messenger" Height="450" Width="800">
 
     <Window.Resources>
         <viewmodel:EncryptedMessageViewModel x:Key="EncryptedMessageViewModel"/>
@@ -17,16 +17,17 @@
         <view:AgentDisplayView x:Key="AgentDisplayView" />
     </Window.Resources>
 
-    <DockPanel Margin="20">
-        <TabControl Width="530" BorderThickness="1" Margin="0, 0, 10, 0">
-            <TabItem Header="Encrypt/Decrypt" Content="{StaticResource EncryptDecryptView}"/>
-            <TabItem Header="View Messages" Content="{StaticResource MessageDatabaseView}"/>
-        </TabControl>
+    <Grid Background="#303030">
+        <DockPanel Margin="20">
+            <TabControl Width="530" BorderThickness="1" Margin="0, 0, 10, 0">
+                <TabItem Header="Encrypt/Decrypt" Content="{StaticResource EncryptDecryptView}"/>
+                <TabItem Header="View Messages" Content="{StaticResource MessageDatabaseView}"/>
+            </TabControl>
 
-        <Border BorderThickness="1" BorderBrush="Black">
-            <ContentControl Content="{StaticResource AgentDisplayView}"/>
-        </Border>
+            <Border BorderThickness="1" BorderBrush="Black">
+                <ContentControl Content="{StaticResource AgentDisplayView}"/>
+            </Border>
 
-    </DockPanel>
-   
+        </DockPanel>
+    </Grid>
 </Window>
