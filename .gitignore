@@ -12,6 +12,7 @@
 AdvancedAlphabetEncryption/Utilities/PoemWriter.cs
 AdvancedAlphabetEncryption/Migrations
 AdvancedAlphabetEncryption/connection.config
+AdvancedAlphabetEncryption.UnitTests
 TestApp
 
 # User-specific files (MonoDevelop/Xamarin Studio)
