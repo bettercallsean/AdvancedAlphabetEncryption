@@ -193,10 +193,8 @@ namespace AdvancedAlphabetEncryption.ViewModels
 
             // Adds '0' padding to the number. e.g. '8' will turn to '08' but '14' will stay as '14'
             // Will produce a code in the following format - XX.XX.XX
-            KeywordCode = string.Format("{0}.{1}.{2}", PoemSelection.ToString().PadLeft(2, '0'), LineSelection.ToString().PadLeft(2, '0'), WordSelection.ToString().PadLeft(2, '0'));
-
-            // Accounting for the 0-based array indexing of the words (word 1 will be at index 0)
-            WordSelection--;
+            int tmpWordSelection = ++WordSelection;
+            KeywordCode = string.Format("{0}.{1}.{2}", PoemSelection.ToString().PadLeft(2, '0'), LineSelection.ToString().PadLeft(2, '0'), tmpWordSelection.ToString().PadLeft(2, '0'));
 
             wordArray = Poem[LineSelection];
             KeywordString = wordArray[WordSelection];
@@ -230,17 +228,13 @@ namespace AdvancedAlphabetEncryption.ViewModels
             LineSelection = random.Next(1, Poem.Count);
 
             wordArray = Poem[LineSelection];
-            WordSelection = random.Next(0, wordArray.Length);
-
+            WordSelection = random.Next(1, wordArray.Length);
             KeywordString = wordArray[WordSelection];
-
-            // The word selection will be using a 0-based indexing system, so each value needs to be increased by 1 to reflect that counting starts at 1
-            // in the real world
-            WordSelection++;
 
             // Adds '0' padding to the number. e.g. '8' will turn to '08' but '14' will stay as '14'
             // Will produce a code in the following format - XX.XX.XX
-            KeywordCode = string.Format("{0}.{1}.{2}", PoemSelection.ToString().PadLeft(2, '0'), LineSelection.ToString().PadLeft(2, '0'), WordSelection.ToString().PadLeft(2, '0'));
+            int tmpWordSelection = ++WordSelection;
+            KeywordCode = string.Format("{0}.{1}.{2}", PoemSelection.ToString().PadLeft(2, '0'), LineSelection.ToString().PadLeft(2, '0'), tmpWordSelection.ToString().PadLeft(2, '0'));
             KeywordSetBy = App.agent.Initials;
             KeywordDaySet = DateTime.Now;
 
