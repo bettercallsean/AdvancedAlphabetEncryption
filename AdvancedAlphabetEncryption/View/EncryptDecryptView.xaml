@@ -22,7 +22,8 @@
 
             <DockPanel HorizontalAlignment="Right" >
                 <Button Command="{Binding EncryptCommand}" Height="20" Width="80" Content="Encrypt" DockPanel.Dock="Right"/>
-                <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0" DockPanel.Dock="Right"/>
+                <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0" DockPanel.Dock="Right"
+                          ToolTip="Saves encrypted text to a file. This won't re-encrypt your message if it has already been encrypted"/>
             </DockPanel>
         </StackPanel>
 
@@ -40,11 +41,12 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Decryption keyword:" Padding="0, 0, 10, 0" Grid.Column="0"/>
-                <TextBox Width="100" Text="{Binding Path=Keyword, Mode=TwoWay}" Grid.Column="1" />
+                <TextBox Width="100" Text="{Binding Path=Keyword, Mode=TwoWay}" Grid.Column="1" ToolTip="Enter the keyword that the message was encrypted with"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2" >
-                    <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0" />
-                    <Button Command="{Binding DecryptCommand}" Height="20" Width="80" Content="Decrypt" />
+                    <CheckBox Content="Save to file" IsChecked="{Binding Path=SaveToFileChecked, Mode=OneWayToSource}" Padding="0, 0, 20, 0" 
+                              ToolTip="Saves encrypted text to a file. This won't re-encrypt your message if it has already been encrypted"/>
+                    <Button Command="{Binding DecryptCommand}" Height="20" Width="80" Content="Decrypt"/>
                 </StackPanel>
             </Grid>
 
