@@ -17,7 +17,7 @@
     <StackPanel Background="White" DataContext="{Binding Source={StaticResource MessageDatabaseViewModel}}" Margin="10">
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,10">
             <TextBlock Text="Messages" FontSize="18" Margin="0,0,10,0"/>
-            <Button Width="26" Height="26" Command="{Binding RefreshMessagesCommand}">
+            <Button Width="26" Height="26" Command="{Binding RefreshMessagesCommand}" ToolTip="Refresh message view">
                 <StackPanel>
                     <Image Source="pack://application:,,,/Resources/Images/refresh.png"/>
                 </StackPanel>
@@ -35,11 +35,13 @@
             </StackPanel>
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Filter Input" Margin="0,0,0,2"/>
-                <TextBox Text="{Binding FilterInput, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="0, 0, 5, 0" />
+                <TextBox Text="{Binding FilterInput, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="0, 0, 5, 0" 
+                         ToolTip="Enter text for the system to search for"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Bottom">
                 <CheckBox Content="Search range of dates?" IsChecked="{Binding SearchRangeOfDatesEnabled}" Margin="0, 0, 0, 4" 
-                          Visibility="{Binding FilterByDateEnabled, Converter={StaticResource BoolToVisibilityConverter}}" />
+                          Visibility="{Binding FilterByDateEnabled, Converter={StaticResource BoolToVisibilityConverter}}" 
+                          ToolTip="Enable if you wish to search for a keyword that was used between two specified dates"/>
             </StackPanel>
             
         </StackPanel>
