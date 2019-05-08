@@ -6,7 +6,7 @@
              xmlns:viewmodel="clr-namespace:AdvancedAlphabetEncryption.ViewModels"
              xmlns:local="clr-namespace:AdvancedAlphabetEncryption.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="290">
+             d:DesignHeight="350" d:DesignWidth="290">
     
     <UserControl.Resources>
         <viewmodel:AgentViewModel x:Key="AgentViewModel"/>
@@ -28,7 +28,7 @@
         </StackPanel>
 
         <StackPanel DataContext="{Binding Source={StaticResource KeywordViewModel}}">
-            <TextBlock Text="{Binding Keyword.DaySet, StringFormat=Keyword for {0:dddd dd MMMM}}" HorizontalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Keyword.DaySet, StringFormat=Keyword for {0:dddd dd MMMM}:}" HorizontalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"/>
             <TextBlock Text="{Binding Keyword.KeywordString}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="24"/>
             
         </StackPanel>
